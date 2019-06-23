@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>shop_cart</title>
+<link rel="stylesheet" type="text/css" href="css/main.css"/>
+<link rel="stylesheet" type="text/css" href="css/shop_cart.css"/>
+<script type="text/javascript" src="js/all/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/shop_cart/shop_cart.js"></script>
+</head>
+<body>
+<{include file='header.html'}>
+<div class="hh">
+	<div class="head text_auto">
+		<div class="head_fl">		
+			<a href="index.php"><span class="logo"></span></a>
+			<a href="#" class="cart">购物车</a>
+		</div>
+		<div class="head_fr">
+			<form class="form1">
+				<input type="text" placeholder="搜索商家或地点" /><input type="submit" value=""/>
+			</form>
+		</div>	
+	</div>
+</div>
+<div class="text_auto">
+	<p class="shop"><span>全部商品</span></p>
+	<table border="0" cellspacing="0" cellpadding="0" class="sc_tab" width="1061">
+		<tr><td class="tdd1"><input type="checkbox" id="all_sel" /><span class="all_ck">全选</span></td><td>商品</td><td>型号</td><td>单价(元)</td><td>数量</td><td>小计(元)</td><td class="last_td">操作</td></tr>
+		<{foreach from=$goods_list key=k item=i}>
+		<tr>
+			<td class="tx_left tdd1"><input type="checkbox" class="cks" goods-id="<{$i.id}>" name="ck[]" value="<{$i.id}>" /></td>
+			<td class="sc_td">
+				<div class="td_fl"><a href="#"><img src="/upload/goods/<{$i.photos.0}>?<{rand(0,999)}>" width="90" height="75"/></a></div>
+				<div class="td_fr tx_left">
+					<span class="sc_title"><{$i.title}></span><br />
+					<p class="sc_pro"><{$i.about}></p>
+				</div>
+			</td>
+			<td class="op">xxxx</td>
+			<td class="price"><input type="text" value="<{$i.price}>" id="price" class="pir" readonly/></td>
+			<td class="num"><span class="less">-</span><input type="text" class="val" value="<{$n[$k]}>" /><span class="add">+</span></td>
+			<td><input type="text" id="res" class="res" value="<{$i.price}>" readonly/></td>
+			<td><a href="javascript:void(0)" del-id="<{$i.id}>" class="del last_td">删除</a></td>
+		</tr>
+		<{/foreach}>
+		<!--<tr>
+			<td class="tx_left"><input type="checkbox" class="cks"/></td>
+			<td class="sc_td">
+				<div class="td_fl"><a href="#"><img src="img/shop_cart/a.jpg"/></a></div>
+				<div class="td_fr tx_left">
+					<span class="sc_title">重庆刘一手自助火锅</span><br />
+					<span class="sc_pro">仅售58元，价值68元单人自助火锅！节假日通用，免费WiFi，免费WiFi！</span>
+				</div>
+			</td>
+			<td class="price"><input type="text" value="55.5" id="price" class="pir" readonly/></td>
+			<td class="num"><span class="less">-</span><input type="text" class="val" value="1" /><span class="add">+</span></td>
+			<td><input type="text" id="res" class="res" value="55.50" readonly/></td>
+			<td><a href="#" class="del">删除</a></td>
+		</tr>-->
+	</table>
+	<div class="scf_box">
+		<ul class="fl_box">
+			<li><a href="#" class="del_ck" >删除选中的商品</a></li>
+			<li><a href="#">清除下柜商品</a></li>
+		</ul>
+		<ul class="fr_box">
+			<li>总价:&nbsp;<input type="text" class="zong" value="0.00" /></span></li>
+			<li id="go"><a href="javascript:void(0)">去结算</a></li>
+		</ul>
+	</div>
+</div>
+<{include file='footer.html'}>
+
+<script type="text/javascript">
+
+
+$('#go').click(function(){
+var len = $('.cks:checked').length;
+if(len==0){
+	alert('请选择商品！！');
+	return false;
+}else{
+	//$("#car_form").submit();
+	
+	var id_arr=new Array();
+	var op_arr=new Array();
+	var num_arr=new Array();
+$('.cks:checked').each(function(){
+	id_arr.push($(this).attr('goods-id'));
+	op_arr.push($(this).parent().siblings('.op').text());
+	num_arr.push($(this).parent().siblings().find('.val').val())		
+})
+	$.get('confirm_cookie.php',{id:id_arr,op:op_arr,num:num_arr},function(data){
+		//document.write(data)
+		if(data==1){
+			window.location.replace('confirm_order.php');
+		}
+	})
+
+
+}
+})
+
+	
+	
+	
+</script>
+
+</body>
+</html>

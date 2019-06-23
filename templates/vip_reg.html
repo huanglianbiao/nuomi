@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="css/register.css"/>
+<script type="text/javascript" src="js/all/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="admin/js/jquery.form.js"></script>
+</head>
+<body>
+<header>
+	<div class="head text_auto">
+		<div class="head_fl">		
+			<a href="index.php"><span class="logo"></span></a>
+			<a href="vip_reg.php" class="login">注册百度账号</a>
+		</div>
+		<div class="head_fr">
+		<span>我已注册，现在就</span><a href="vip_login.php">登录</a>
+		</div>	
+	</div>
+</header>
+<hr class="hr" />
+<div class="text_auto content">
+	<div class="content_fl">
+		<form id="myform" method="post" action="vip_reg_post.php">			
+			<table border="0" cellspacing="0" cellpadding="0" class="tab1">
+				<tr>
+					<td class="td1">用户名</td>
+					<td><input type="text" name="user" placeholder="请设置用户名" class="name tt" /></td>
+					<td><span id="name_error" class="tis">设置后不可更改<br/>中英文皆可，最长14英文或7个汉字</span></td>
+				</tr>
+				<tr>
+					<td class="td1">手机号</td>
+					<td><input type="text" name="tel" placeholder="用于登录和找回密码" class="tel tt" /></td>
+					<td><span id="tel_error" class="tis">请输入中国大陆手机号，其他用户不可见</span></td>
+				</tr>	
+				<tr><td class="td1">密码</td>
+					<td><input type="password" name="pwd" placeholder="请设置登录密码" class="pwd tt" id="pwd" /></td>
+					<td><span id="pwd_error" class="tis">长度为6-14个字符<br />支持数字，大小写字母和标点符号<br />不允许有空格</span></td>
+				</tr>
+				<tr><td class="td1">确认密码</td>
+					<td><input type="password" name="" value="" placeholder="请再次输入密码" class="code tt" id="pwd2" /></td>
+					<td><span id="code_error" class="tis"></span></td>
+				</tr>
+				<tr><td></td><td><input type="checkbox" id="ck1" value="" /><label for="ck1" class="lab">阅读并接受<a href="https://passport.baidu.com/static/passpc-account/html/protocal.html">《百度用户协议》</a></label></td><td></td></tr>
+				<tr><td></td><td><input type="submit" name=""value="注册" id="rgt" /></td><td></td></tr>
+			</table>
+		</form>		
+	</div>
+	<div class="content_fr">
+		<img src="img/register/fr.png"/>
+	</div>
+</div>
+<div style="clear: both;"></div>
+<footer>
+	<div class="text_auto foot">
+		2016 ©Baidu
+	</div>
+</footer>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.tt').focus(function(){			
+		$(this).parents().siblings().children('.tis').show();
+	
+})
+	$('.tt').blur(function(){
+		$(this).parents().siblings().children('.tis').hide();
+	})
+	
+})
+
+$('#rgt').click(function(){
+	var pwd=$('#pwd').val();
+	var pwd2=$('#pwd2').val();
+	if(pwd!=pwd2){
+		alert('两次输入的密码不一致！！');
+		return false;
+	}
+	
+	/*$("#myform").ajaxSubmit({
+        url:"vip_reg_post.php",
+        type:"POST",
+        success:function(data){
+        	//alert(data)
+          if(data==1){	
+          	alert('恭喜您已成为本店的会员！！');
+			setTimeout(function(){
+				location.replace('vip_login.php');
+			},2000);		
+			}
+       	 },
+        error:function(msg){
+          alert("error:"+msg);
+        }
+     });*/
+	
+})
+
+</script>
+</body>
+</html>

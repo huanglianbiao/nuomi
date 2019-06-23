@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>confirm_order</title>
+<link rel="stylesheet" type="text/css" href="css/main.css"/>
+<link rel="stylesheet" type="text/css" href="css/confirm_order.css"/>
+<script src="js/all/jquery-1.7.2.min.js"></script>
+<script src="js/all/dist/jquery.validate.min.js"></script>
+<script src="js/all/dist/localization/messages_zh.js"></script>
+<script type="text/javascript" src="js/confirm_order/confirm_order.js"></script>
+</head>
+<body>
+<{include file='header.html'}>
+<div class="co_auto"> 
+	<div class="co_top">
+		<div class="ct_fl">
+			<a href="index.php"><img src="img/index/logo.png"/></a>
+		</div>
+		<ul class="ct_fr">
+			<{foreach from=$arr item=i}>
+				<li class="round bgp"><{$i}></li>
+			<{/foreach}>
+			<li class="round bgp">1</li>
+			<li class="co_size sred">确认订单</li>
+			<li class="line"></li>
+			<li class="round">2</li>
+			<li class="co_size">选择支付方式</li>
+			<li class="line"></li>
+			<li class="round">3</li>
+			<li class="co_size">购买成功</li>
+		</ul>
+	</div>
+	<div style="clear: both;"></div>
+	<div class="address">
+		<p class="ads">收货人信息</p>	
+		<form action="go_buy.php" method="post" id="myform">
+		<table border="0" cellspacing="0" cellpadding="0" class="ads_tab">
+			<input type="hidden" class="vip_id" value="<{$vip_data.id}>" />
+			<tr><td>收货人:</td><td><input type="text" required rangelength="2 5" name="name" value="<{$vip_data.user}>"/></td></tr>
+			<tr>
+				<td>所在地区:</td>
+				<td>
+					<select name="" id="pre" onchange="fun(this)">
+						<option value="">-省-</option>
+					</select>
+					<select id="city" onchange="fun2(this)">
+						<option value="">-市-</option>
+					</select>
+					<select id="area">
+						<option value="">-县/区-</option>
+					</select>
+				</td>
+			</tr>
+			<tr><td>详细地址:</td><td><textarea rows="3" cols="30" required name="address"><{$vip_data.address}></textarea></td></tr>
+			<tr><td>手机号:</td><td><input type="text" digits value="<{$vip_data.tel}>" name="tel"/></td></tr>
+			<tr><td>固定电话:</td><td><input type="text" digits/></td></tr>
+			<tr><td>邮箱:</td><td><input type="email" value="<{$vip_data.email}>" name="email" /></td></tr>
+			<tr><td></td><td><input type="submit" value="保存收货信息" /></td></tr>
+			<input type="hidden" name="all_money" id="all_money" />
+		</table>
+		</form>
+	</div>
+	<div style="clear: both;"></div>
+	<table border="0" cellspacing="0" cellpadding="0" class="sc_tab">
+		<tr><td>商品</td><td>型号</td><td>单价(元)</td><td>数量</td><td>小计(元)</td></tr>
+		<{foreach from=$order_list key=k item=i}>
+		<tr>
+			<td class="sc_td">
+				<div class="td_fl">
+					<input type="hidden" class="goods_id" value="<{$i.id}>" />
+					<a href="#"><img src="/upload/goods/<{$goods_list[$k]['photos'][0]}>" class="photos" width="100" height="75"/></a>
+				</div>
+				<div class="td_fr tx_left">
+					<span class="sc_title"><{$goods_list[$k]['title']}></span><br />
+					<span class="sc_pro"><{$goods_list[$k]['about']}></span>
+				</div>
+			</td>
+			<td class="op"><{$i.op}></td>
+			<td class="price"><input type="text" value="<{$goods_list[$k]['price']}>" id="price" class="pir" readonly/></td>
+			<td class="num"><span class="less"></span><input type="text" class="val" value="<{$i.num}>" readonly /><span class="add"></span></td>
+			<td><input type="text" id="res" class="res" value="<{$goods_list[$k]['price']}>" readonly/></td>			
+		</tr>
+		<{/foreach}>
+	</table>
+	<ul class="fr_box">
+			<li>应付总额:&nbsp;<input type="text" class="zong" value="0.00" /></span></li>
+			<li id="go">确认结算</li>
+		</ul>
+</div>
+<script type="text/javascript" src="js/all/sanji_select.js"></script>
+<script type="text/javascript">
+setInterval(function(){
+	var all=$('.zong').val();
+	$('#all_money').val(all)
+},10)
+	
+$('#go').click(function(){
+	//	alert(0)
+	$('#myform').submit();
+})
+
+	
+</script>
+
+
+</body>
+</html>

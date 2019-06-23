@@ -1,0 +1,253 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+body{
+	font-family: "微软雅黑";
+}
+a{
+	text-decoration: none;
+}
+header{
+	padding: 20px;
+	overflow: hidden;
+	border-bottom:1px solid #d9d9d9;
+}
+.head{
+	width: 980px;
+	margin: auto;
+}
+.head_fl{
+	overflow: hidden;
+	float: left;
+}
+.logo{
+	display: inline-block;
+	height:39px;
+	width: 100px;
+	background:url(../img/vip_login/icon.png) no-repeat;
+	background-position: -285px -22px;
+	
+}
+.login{
+	color: #666;
+	border-left:1px solid #C9C9C9;
+	padding: 0px 15px;
+	margin-left:20px;
+	position: relative;
+	bottom: 5px;
+}
+.head_fr{
+	float: right;
+	padding: 10px;
+}
+.head_fr span{
+	color: #666;
+	font-size: 12px;
+}
+.head_fr a{
+	color: #666;
+	font-weight: bold;
+	border:1px solid #DDD;
+	padding:3px 15px;
+	border-radius: 3px;
+	margin-left: 5px;
+	font-size: 12px;
+}
+.body{
+	background: #F5FBFD;
+	border-bottom:5px solid #DBDBDB;
+	overflow: hidden;
+}
+.bd_fl{
+	float: left;
+    margin-top: 49px;
+    width: 623px;
+    height: 337px;
+    background: url(../img/vip_login/bg.png)
+}
+.bd_fr{
+	float: right;
+}
+.form_box{
+	padding:10px 15px;
+	overflow: hidden;
+	background-color: #fff;
+	margin-top:50px;
+	margin-bottom: 30px;
+}
+.bd_fr form{
+	overflow: hidden;
+	background-color: #fff;
+	line-height:50px;
+}
+.p1 strong{
+	color: #666;
+}
+.p2{
+	overflow: hidden;
+}
+.p2 .msg_login{
+	display: inline-block;
+	float: right;
+	color: #666;
+	font-size: 13px;
+}
+.p2 .msg_login:hover{
+	color: #1b66c7;
+	text-decoration:underline;
+}
+.p2 .msg_login span{
+	display: inline-block;
+	background: url(../img/vip_login/sms.png);
+	height: 15px;
+	width: 10px;	
+	margin-right:5px;
+	vertical-align:middle;
+	
+}
+.bd_fr form input{
+	height:25px;
+	width: 245px;
+	padding: 5px;
+	border:1px solid #eee;
+	color: #999;
+	outline: none;
+}
+.bd_fr form input:focus{
+	border-color:#FF6699 ;
+}
+.bd_fr form input[type=checkbox]{
+	width: 15px;
+	vertical-align: middle;
+}
+.p3{
+	position: relative;
+}
+.p3 input[type=text]{
+	padding-left: 30px;
+	
+}
+.p3 .ico1{
+	display:inline-block;
+	height: 20px;
+	width: 20px;
+	background:url(../img/vip_login/icon.png) no-repeat;
+	background-position: -364px -95px;
+	position: absolute;
+	top:15px;
+	left: 5px;
+}
+.p4{
+	position: relative;
+}
+.p4 input[type=password]{
+	padding-left: 30px;
+}
+.p4 .ico2{
+	display:inline-block;
+	height: 20px;
+	width: 20px;
+	background:url(../img/vip_login/icon.png) no-repeat;
+	background-position: -364px -135px;
+	position: absolute;
+	top:15px;
+	left: 5px;
+}
+.p5 label{
+	color: #666;
+	font-size: 12px;
+	margin-left: 5px;
+}
+.p5 span{
+	float: right;
+}
+.p5 span a{
+	color: #73ADC9;
+	font-size: 12px;
+}
+.p5 span a:hover{
+	text-decoration: underline;
+}
+.p6 input[type=submit]{
+	width:280px;
+	height: 35px;
+	border: 1px solid  #FF6699;
+	background: #FF6699;
+	color: #fff;
+	font-weight: bold;
+	font-size: 14px;
+}
+ul li{
+	list-style: none;	
+}
+.logs {
+	margin-top: 10px;
+}
+.logs li{
+	float: left;
+	margin-right: 20px;
+}
+.qq{
+	display: inline-block;
+	height: 25px;
+	width: 25px;
+	background: url(../img/vip_login/pass_login.png);
+	background-position:-88px 0px;
+}
+
+.sina{
+	display: inline-block;
+	height: 25px;
+	width: 25px;
+	background: url(../img/vip_login/pass_login.png);
+	background-position:-63px 0px;
+}
+.weibo{
+	display: inline-block;
+	height: 25px;
+	width: 25px;
+	background: url(../img/vip_login/pass_login.png);
+	background-position:-112px 0px;
+}
+footer{
+	text-align: center;
+	margin-top: 40px;
+}
+.foot{
+	width: 808px;
+	margin: auto;
+	text-align: center;
+}
+.foot li{
+	float: left;
+	color: #666;
+	font-size: 13px;
+	padding:0px 5px;
+}
+.foot li a{
+	color:#666;
+	padding: 0px 10px;
+	border-right:1px solid #eee ;
+	font-size: 13px;
+}
+.foot li a:hover{
+	text-decoration: underline;
+}
+.footer{
+	text-align: center;
+	font-family: SimSun;
+    color: #999;
+    font-size: 12px;
+    margin-top: 45px;
+}
+.footer a{
+	font-family: SimSun;
+    color: #999;
+    font-size: 12px;
+}
+.error{
+	display: inline-block;
+	color: red;
+	font-size:13px;
+}

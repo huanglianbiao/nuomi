@@ -1,0 +1,66 @@
+<header>
+	<div class="top">
+	<div class="text_center">
+		<ul class="top_fr">
+			<{if $user!=""}>
+				<li><a href="javascipt:void(0)" class="color-cr"><{$user}> 百度糯米欢迎您~</a></li>
+				<li><a href="vip_exit.php" class="color-c">退出</a></li>
+			<{else}>
+				<li><a href="vip_login.php" class="color-c">登录</a></li>
+			<{/if}>
+			<li>|</li>
+			<li><a href="vip_reg.php" class="color-c">注册</a></li>
+			<li>|</li>
+			<li><a href="#" class="color-c">手机糯米</a></li>			
+			<li>|</li>
+			<li><a href="order_list.php" class="color-c">我的订单</a></li>
+			<li>|</li>
+			<li><a href="shop_cart.php" class="color-c">购物车</a></li>
+			<li>|</li>
+			<li><a href="order_list.php" class="color-c">收藏</a></li>
+		</ul>
+	</div>	
+	</div>
+	<div class="h_m text_center">
+		<div class="h_m_fl">
+			<a href="index.php"><img src="img/index/logo.png"/></a>
+		</div>
+		<form>
+			<input type="text" name="" id="" value=""  placeholder="搜索商家或地点"/><input type="submit" value=""/>
+		</form>
+	</div>
+	<div class="nav_box">
+	<nav class="text_center nav">
+		<ul class="myul">
+			<li class="d_wid"><a href="#">全部分类</a>
+				<ul id="menu_fl" class="menu_fl">
+					<{foreach from=$sort_list1 item=i}>
+							<li><a href="list.php?id=<{$i.id}>" class="color_bb"><{$i.name}></a><em class="icon2"></em></span>
+								<div class="fr_down">				
+									<dl>
+										<p><a href="list.php?id=<{$i.id}>"  class="color_b">热门分类</a></p>
+								<{foreach from=$sort_list item=j}>
+									<{if $j.pid==$i.id}>
+										<dd><a href="list.php?id=<{$j.id}>" class="color-c"><{$j.name}></a></dd>
+										<dd>|</dd>
+									<{/if}>
+								<{/foreach}>
+									</dl>
+								</div>
+							</li>	
+					<{/foreach}>
+				</ul>
+			</li>
+			<li><a href="index.php">首页</a></li>
+			<li><a href="#">精选品牌</a><span class="icon">Hot</span></li>
+			<li><a href="#">电影</a><span class="icon">Hot</span></li>
+			<li><a href="#">酒店</a></li>
+			<li><a href="#">出行</a></li>
+			<li><a href="#">酒店</a></li>
+			<li><a href="#">出行</a></li>			
+		</ul>
+	</nav>	
+	</div>
+</header>
+
+<!--<script src="js/header/header.js"></script>	-->	

@@ -1,0 +1,135 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+body{
+	font-family: "微软雅黑";
+}
+.ltop{
+	margin-top: 20px;
+}
+.cb{
+	color:#666666 ;
+	font-size: 14px;
+}
+.bgp{
+	background-color: #FF5E89;
+	color: #fff;
+	font-size: 13px;
+	padding: 2px 3px;
+}
+.hbgp{
+	color:#666666 ;
+	font-size: 14px; ;
+}
+.hbgp:hover{
+	color:#FF5E89 ;
+}
+.sort{
+	margin-top: 20px;
+	padding:10px;
+	width: 1188px;
+	border:1px solid #CCCBD9;
+}
+.sort table tr td{
+	padding: 5px 10px;
+}
+.choice{
+	border:1px solid #CCCBD9;
+	overflow: hidden;
+	background-color:#FBFBFB;
+	margin-top: 20px;
+}
+.choice li{
+	
+	float: left;
+	padding: 10px 20px;
+}
+.imgs_pro{
+	border-bottom: 1px solid #CCCBD9;
+	padding-bottom:20px ;
+	overflow: hidden;
+	margin-top: 20px;
+}
+.img_pro{
+	width: 222px;
+	border: 1px solid #fff;
+	padding:4px;
+	float: left;
+	margin-right:10px;
+}
+.img_pro:last-child{
+	margin-right: 0px;
+}
+.img_pro_bot{
+	width: 223px;
+	
+}
+.img_pro:hover{
+	border: 1px solid #FF4883;
+}
+.img_pro_bot h4{
+	color: #000000;
+	width:200px;
+	overflow:hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.img_pro_bot h4:hover{
+	color: #FF4883 ;
+}
+.price{
+	color: #FF4883;
+	font-size:25px;
+}
+.shopping{
+	float: right;
+	font-size: 13px;	
+	cursor: pointer;
+}
+.shopping a{
+	color: #FF4883;
+}
+.shopping img{
+	vertical-align: middle;
+}
+.img_pro_bot p:last-child{
+	margin-top:15px;
+}
+.pages{
+	text-align: center;
+	margin-top: 85px;
+}
+.page{
+	display: inline-block;
+}
+.page li{
+	float: left;
+	border: 1px solid #CCCBD9;
+	margin-right:10px;
+	border-radius: 3px;
+}
+.page li a{
+	padding:2px 10px;
+	color: #666;
+	font-size: 13px;
+}
+.page li:hover{
+	border: 1px solid #FF4883;
+	border-radius: 3px;
+}
+.page li:hover a{
+	color: #FF4883;
+}
+.over_hid{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.bg_color{
+	background:#eee;
+}
+.c_red{
+	color:#FF318C;
+	font-weight:700;
+}

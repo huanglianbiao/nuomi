@@ -1,0 +1,219 @@
+body{
+	font-family: "微软雅黑";
+}
+input{
+	outline: none;
+}
+.h_m,.h_m_fl,.nav_box{
+	display: none;
+}
+.hh{
+	padding:20px 0px 10px;
+	overflow: hidden;
+}
+.text_center{
+	width:1070px;
+}
+.text_auto{
+	width:1070px;
+	margin: auto;
+	overflow: hidden;
+}
+.head_fl{
+	overflow: hidden;
+	float: left;
+}
+.logo{
+	display: inline-block;
+	height:39px;
+	width: 100px;
+	background:url(../img/vip_login/icon.png) no-repeat;
+	background-position: -285px -22px;
+	
+}
+.cart{
+	color: #666;
+	border-left:1px solid #C9C9C9;
+	font-size: 20px;
+	font-weight:600;
+	padding: 0px 15px;
+	margin-left:20px;
+	position: relative;
+	bottom: 5px;
+}
+.head_fr{
+	float: right;
+	padding: 10px;
+}
+.form1 input{
+	outline: none;
+	padding:5px 10px;	
+}
+.form1 input[type=text]{
+	color:#FF318C;
+	width: 400px;
+	height:27px;
+	border: 1px solid #ccc;	
+}
+.form1 input[type=submit]{
+	outline: none;
+    border: 1px solid #ccc;
+    border-left: none;
+    background-color: #fff;
+    background-image: url(../img/index/icon-sou.png);
+    background-position:4px 2px;
+    padding: 11px 10px;
+    width:40PX;
+    vertical-align: top;
+}
+.shop span{
+	font-weight:600;
+	color:#F0325A;
+	font-size: 20px;
+	border-bottom: 2px solid  #F0325A;
+	padding:5px 0px;
+}
+.sc_tab{
+	margin-top:5px;
+}
+.sc_tab tr td{
+	padding: 10px;
+	text-align: center;
+	border-bottom:1px solid #e9e9e9;
+}
+.sc_tab tr:first-child td{
+	background:#F3F3F3 ;
+	border-top:1px solid #e9e9e9;
+	color: #666;
+	font-size: 14px;
+}
+.all_ck{
+	white-space: nowrap;
+	padding: 0px;
+}
+.last_td{
+	width: 35px;
+}
+.sc_td{
+	display: flex;
+}
+.td_fl{
+	height:80px;
+	width: 120px;
+}
+.sc_td_fl img{
+	height:80px;
+	width: 120px;
+}
+.td_fr{
+	flex: 1;
+}
+.num .less,.add{
+	display: inline-block;
+	padding:2px;
+	width: 20px;
+	border: 1px solid #C9C9C9;
+	vertical-align: middle;	
+	cursor: pointer;
+}
+.num{
+	width:155px;
+}
+.tdd1{
+	width:45px;
+}
+.num .val{
+	border:none;
+	padding: 5px;
+	border-top: 1px solid #C9C9C9;
+	border-bottom: 1px solid #C9C9C9;
+	text-align: center;
+	width:35px;
+}
+.cks{
+	width: 13px;
+	height: 13px;
+	float: left;
+	padding: 0px;
+}
+.tx_left{
+	text-align: left;
+}
+#price,#res{
+	width:60px;
+	border: none;
+	font-size:14px;
+}
+#res{
+	width: 60px;
+	font-size:16px;
+	font-weight:600;
+	color: #F0325A;
+}
+.sc_title{
+	font-size:16px;
+	color:#000;
+}
+.sc_pro{
+	display:inline-block;
+	font-size: 13px;
+	color: #666;
+	margin-top: 15px;
+}
+.del{
+	color: #666;
+	font-size: 13px;
+}
+.scf_box{
+	border: 1px solid #e9e9e9;
+	overflow: hidden;
+}
+.fl_box{
+	padding: 10px 5px;			
+	float: left;
+}
+.fl_box li{
+	float: left;
+}
+.fl_box li a{
+	font-size: 13px;
+	color:#666;
+	margin-left: 10px;
+}
+.fl_box li:hover a{
+	color: #F0325A;
+}
+.fr_box{
+	
+	float: right;
+}
+.fr_box li{
+	float: left;
+	font-size: 13px;
+	color:#666;
+	margin-left: 10px;
+	padding: 10px 5px;
+}
+.zong{
+	color: #F0325A;
+	font-size:18px;
+	font-weight:600;
+	border:none ;
+	width:75px;
+	height: 30px;
+}
+#go{
+	background: #F0325A;
+	border: 1px solid #F0325A;
+}
+#go a{
+ 	display: inline-block;
+	color: #fff;
+	padding:6px 20px;
+}
+.aside_fr{
+	display: none;
+}
+.foot_mid ul{
+	padding: 0px 63px;
+}

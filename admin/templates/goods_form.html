@@ -1,0 +1,187 @@
+<div class="form animated fadeInUp" id="noz">	
+<h3>增加/编辑</h3>
+<form  method="post" enctype="multipart/form-data" id="myform">
+<div class="ed_sort">
+	顶级分类：<select name="sort_id" id="ssel" onchange="fun(this.value)">	
+  				<option value="0">顶级分类</option>
+	  			<{foreach from = $tsl item=v}>
+	  				<{if $v.id==$ed_list.sort_id}>
+	  					<option value="<{$v.id}>" selected><{$v.name}></option> 					
+	  				<{else}>
+	 					<option value="<{$v.id}>"><{$v.name}></option>
+	  				<{/if}>
+	  			<{/foreach}>
+  			</select>&nbsp;&nbsp;
+  	二级分类：<select name="sort_id2" id="ssel2">
+  				<option value="<{$ed_list.sort_id2}>"><{$sort_goods[$ed_list.sort_id2]}></option>
+  			 </select>
+  </div>
+
+ <table>
+	<input type="hidden" name="hid" id="hid" value="<{$ed_list.id}>" />
+	<tr><td>标题：</td><td><input type="text" class="form-control" id="title" name="title" value="<{$ed_list.title}>"></td></tr>
+	<tr><td>商品介绍：</td>
+		<td>
+			<textarea class="form-control" name="about"><{$ed_list.about}></textarea>
+		</td>
+	</tr>
+	<tr><td>内容：</td>
+		<td>
+			<textarea class="ckeditor" id="editor_content" name="content" rows="200"><{$ed_list.content}></textarea>
+		</td>
+	</tr>
+    <tr><td>价格：</td><td><input type="text" class="form-control" id="price" name="price" value="<{$ed_list.price}>"></td></tr>
+    <tr><td>图片：</td>
+    	<td class="txt_left">
+    		<p><button class="btn btn-md" id="padd">增加</button></p>
+    		<{if $ed_list.id!=""}>
+    			<{foreach from=$photos item=i key=key}>
+    				<figure class="goods_photo">
+    					<img src="/upload/goods/<{$i}>?<{rand(1,9999)}>" class="ed_img"/><br />
+    					<input type="hidden" name="old_photos[]" value="<{$i}>" />
+    					<figcaption><span class="btn btn-md del_photo" data-url="<{$key}>" >删除</span></figcaption>
+    				</figure>
+    					
+    				
+    			<{/foreach}>
+    		<{/if}>
+    		<input type="file" class="form-control bb" name="photos[]" id="photos">
+    		
+    		<div id="photos_box"></div>
+    	</td>
+    </tr>
+    <tr><td>库存 / 销量：</td>
+    	<td class="txt_left">
+    		<input type="number" min="0" class="form-control num" name="have_num" id="have_num" value="<{$ed_list.have_num}>">&nbsp;
+    		<input type="number" min="0" class="form-control num" name="sale_num" id="sale_num" value="<{$ed_list.sale_num}>">
+    	</td>
+    </tr>
+    <tr><td>交易时间：</td><td><input type="text" class="form-control" id="send_time" name="send_time" value="<{$ed_list.send_time}>"></td></tr>
+    <tr><td>商品选项：</td>
+    	<td class="txt_left">
+    		<p><button class="btn btn-md" id="tadd">增加</button></p>
+    		<{if $ed_list.id>0}>
+    		<{foreach from=$select_option key=k item=i}>  	    			  	    				
+    				<p> 项目<input type="text" class="form-control num s1" name="op1[]" value="<{$k}>">&nbsp;
+    					价格<input type="number" min="0" class="form-control num s2" name="op2[]" value="<{$i}>">&nbsp;<button class="btn btn-md tdel">删除</button>
+    				</p>
+    		<{/foreach}>
+    		<{else}>
+    			项目<input type="text" class="form-control num s1" name="op1[]" value="">&nbsp;价格<input type="number" min="0" class="form-control num s2" name="op2[]" value="">&nbsp;
+    		<{/if}>
+    		<div class="add_del"></div>
+    	</td>
+    </tr>
+    <tr><td>商品标号：</td><td><input type="text" class="form-control" id="goods_code" name="goods_code" value="<{$ed_list.goods_code}>"></td></tr>
+    <tr><td>打折：</td><td><input type="text" class="form-control" id="discount" name="discount" value="<{$ed_list.discount}>"></td></tr>
+    <tr><td>收藏 / 评论：</td>
+    	<td class="txt_left"><input type="number" min="0" class="form-control num" id="collect_num" name="collect_num" value="<{$ed_list.collect_num}>">&nbsp;
+    						 <input type="number" min="0" class="form-control num" id="ping_num" name="ping_num" value="<{$ed_list.ping_num}>">
+    	</td>
+    </tr> 
+    <tr><td></td>
+    	<td><input type="button" value="保存" class="btn btn-success btn-xs"/>&nbsp;
+    		<input type="button" value="返回" id="return" class="btn btn-inverse btn-xs"/>
+    	</td>
+    </tr>
+ </table>	
+</form>
+</div>
+<script type="text/javascript">
+//编辑器
+$(document).ready(function(){  
+    CKEDITOR.replace('editor_content');//括号里面必须是多文本框的id名 
+ 
+});
+
+
+//编辑/增肌一、二级分类
+function fun(sid){
+	//console.log(sid)
+	$('#ssel2').html("");
+	var url='goods_post.php?sid='+sid; 
+	$.get(url,function(data){
+		var data=eval('('+data+')');
+		for(n in data){
+			var ht=$('#ssel2').html();
+			var name=data[n]['name'];
+			var id=data[n]['id'];
+			//console.log($(this))
+			$('#ssel2').html(ht+"<option value="+id+">"+name+"</option>");
+		};
+	});
+};
+//返回按钮
+$('#return').click(function(){
+	$.get('goods.php',function(data){
+		$('#admin_show').html(data);
+	})
+});
+
+//图片动态增删
+$('#padd').click(function(){
+	$('#photos_box').before('<div class="mdd"><input type="file" class="form-control pp" id="photos" name="photos[]">&nbsp;<button class="btn btn-md pdel">删除</button></div>')
+	return false;
+})
+setInterval(function(){
+		$('.pdel').click(function(){
+			$(this).parent().remove();
+		});
+},100)
+
+//选项动态增删
+$('#tadd').click(function(){
+	$('.add_del').before('<p>项目<input type="text" class="form-control num s1" name="op1[]">&nbsp;价格<input type="number" min="0" class="form-control num s2" name="op2[]">&nbsp;<button class="btn btn-md tdel">删除</button></p>');
+	return false;
+})
+setInterval(function(){
+		$('.tdel').click(function(){
+			$(this).parent().remove();
+		});
+},100)
+
+
+//保存
+$('.btn-success').click(function(){	
+	$("#editor_content").val(CKEDITOR.instances.editor_content.getData());
+$("#myform").ajaxSubmit({
+url:"goods_post.php",
+type:"POST",
+success:function(data){
+	//console.log(data);
+     if(data==1){
+		$.get('goods.php',function(data){
+			$('#admin_show').html(data);
+			})
+	}else{
+		alert('增加失败！');
+		return false;
+	}
+},
+error:function(msg){
+  alert("error:"+msg);
+    }
+ });
+
+});
+
+//图片删除
+
+$('.del_photo').click(function(){
+	var id =<{$ed_list.id}>;
+	var index=$(this).attr('data-url');
+	var fig=$(this).parent().parent();
+	$.get('photo_delete.php',{id:id,index:index},function(data){
+		if(data==1){
+			fig.remove();
+		}else{
+			return false;
+		}
+				
+	})
+	return false;
+})
+
+
+
+</script>

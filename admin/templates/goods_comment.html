@@ -1,0 +1,110 @@
+<div class="list">
+  	<h3>评论列表 </h3>	 	
+    <table class="table table-hover">    	
+    <thead>
+	  <tr><th>ID</th><th>商品</th><th>评分</th><th>内容</th><th>评论时间</th><th>状态</th><th>操作</th></tr>
+	  </thead>
+	  <tbody>
+	  <{foreach from =$comment item=i}>	
+	  <tr>
+	  	<td><{$i.id}></td>
+	  	<td><{$i.goods_id}></td>
+	  	<td><{$i.score}></td>
+	  	<td><{$i.content}></td>	  	
+	  	<td><{date('Y-m-d H:s',$i.send_time)}></td>
+	  	<{if $i.status==0}>
+	  		<td>未通过</td>
+	  		<td>
+	  		<a href="javascript:void(0)" data-id="<{$i.id}>" class="btn btn-info btn-xs btn-primary chk" >审核</a>
+	  		<a href="javascript:void(0)" data-id="<{$i.id}>" class="btn btn-danger btn-xs btn btn-primary" >删除</a>
+	  	</td>
+	  	<{else}>
+	  		<td>已通过</td>
+	  		<td>
+	  		<span class="bton" >已审</span>
+	  		<a href="javascript:void(0)" data-id="<{$i.id}>" class="btn btn-danger btn-xs btn-primary" >删除</a>
+	  	</td>
+	  	<{/if}>	  	
+	  	</tr>
+	  	<input type="hidden" id="back_page"/>
+	  <{/foreach}>	
+	  	<tr id="bb">
+	   	   <td colspan="12">
+	  		<ul class="pagination pagination-sm">
+	  			<li><a href="javascript:void(0)" class="page" page-data="1">首页</a></li>
+	  			<{if $prev_page<1}>
+			   		<li><a href="javascript:void(0)">&laquo;</a></li>
+			    <{else}>
+			    	<li><a href="javascript:void(0)" class="page" page-data="<{$prev_page}>">&laquo;</a></li>
+			    <{/if}>
+			    <{section name=sn loop=$all_page}>
+			    	<{if $page==$smarty.section.sn.index+1}>
+			    		<li><a href="javascript:void(0)" class="page" id="bg_color" page-data="<{$smarty.section.sn.index+1}>"><{$smarty.section.sn.index+1}></a></li>
+			    		<{else}>
+			    		<li><a href="javascript:void(0)" class="page" page-data="<{$smarty.section.sn.index+1}>"><{$smarty.section.sn.index+1}></a></li>
+			   		<{/if}>
+			    
+			    <{/section}>
+			    	<{if $next_page > $all_page}>
+			   		<li><a href="javascript:void(0)">&raquo;</a></li>
+			    <{else}>
+			    	<li><a href="javascript:void(0)" class="page" page-data="<{$next_page}>">&raquo;</a></li>
+			    <{/if}>
+			    <li><a href="javascript:void(0)" class="page" page-data="<{$all_page}>">末页</a></li>
+			</ul>
+	  	  </td>
+	   </tr>
+	  </tbody>
+</table>
+</div>
+<script type="text/javascript">
+//审核
+$('.chk').click(function(){
+	var cid=$(this).attr('data-id');
+	 $.confirm({
+        title:'提示',
+        content:'确定审核吗？',
+        animation: 'rotateXR',
+        closeAnimation: 'rotateX',
+        confirm: function(){          
+ 			$.get('goods_comment.php',{id:cid},function(data){
+		if(data==1){
+			var back_page=$('#back_page').val();
+			$.get(back_page,function(data){
+				$('#admin_show').html(data);
+				});
+		}else{
+			alert('审核失败！');
+		}
+	});
+        }
+    });
+});
+
+//删除
+$('.btn-danger').on('click', function () {	 
+	var aa=$(this).parent().parent();
+	var del_id=$(this).attr('data-id');
+    $.confirm({
+        title:'提示',
+        content:'确定删除吗？',
+        animation: 'rotateXR',
+        closeAnimation: 'rotateX',
+        confirm: function(){          
+ 			$.get('goods_comment.php',{del_id:del_id},function(data){
+ 				
+			});
+			aa.remove();
+        }
+    });
+});
+
+//分页
+$('.page').click(function(){
+	var page=$(this).attr('page-data');
+	$.get('goods_comment.php',{page:page},function(data){		
+		$('#admin_show').html(data);
+		$('#back_page').val('goods_comment.php?page='+page);
+	})
+})
+</script>

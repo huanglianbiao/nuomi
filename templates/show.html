@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>show</title>
+<link rel="stylesheet" type="text/css" href="css/main.css"/>
+<link rel="stylesheet" type="text/css" href="css/show.css"/>
+<link rel="stylesheet" type="text/css" href="css/mfglabs_iconset.css"/>
+<script type="text/javascript" src="js/all/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/show/show.js"></script>
+<script type="text/javascript" src="js/index/jquery.lazyload.js"></script>
+<script type="text/javascript" src="js/index/tz_fly.js"></script>
+<script type="text/javascript" src="js/show/xq_bigimg.js"></script>
+<!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6O19WTQWIaww1hHwwwPeXR5IY9GeTKem" ></script> -->
+</head>
+<body>
+<{include file='header.html'}>
+<div class="bor_bt">
+	<p class="text_center s_top">
+		<a href="#" class="cb">团购&nbsp;&nbsp;>&nbsp;&nbsp;</a>
+		<a href="#" class="cb"><{$sort_name[$goods_list.sort_id]}>&nbsp;&nbsp;>&nbsp;&nbsp;</a>
+		<span class="color_p"><{$sort_name[$goods_list.sort_id2]}></span>
+	</p>	
+</div>
+<div class="text_center show_top">
+	<h2 style="font-weight:400;"><{$goods_list.title}></h2>
+	<p class="title"><{$goods_list.about}></p>
+	<div class="show_pro">
+		<div class="sp_fl">
+			<div class="la_img"><img src="/upload/goods/<{$photo.0}>" width="470px" height="285px" class="add_car" xq_big="true" setting='{"pwidth":400,"pheight":400,"margin_top":0,"margin_left":0}' /></div>
+			<div style="margin-top: 10px;">
+			<span class="prev"><img src="img/show/prev.png"/></span>
+			<div class="sm_img_box">
+			<ul class="sm_img">
+				<{foreach from=$photos item=i}>
+				<li><img src="/upload/goods/<{$i}>"height="60px" width="75px"/></li>
+				<{/foreach}>
+			</ul>
+			</div>
+			<span class="next"><img src="img/show/next.png"/></span>
+			</div>
+		</div>
+		<div class="sp_fr">
+			<input type="hidden" id="dprice" value="<{$goods_list.price}>" />
+			<table border="0" cellspacing="0" cellpadding="0" class="tab">
+				<tr><td class="td1">价格：</td><td class="sd_price"></td></tr>
+				<tr><td class="td1">配送至：</td>
+					<td class="">
+						<select name="" id="pre" onchange="fun(this)">
+							<option value="">-省-</option>
+						</select>
+						<select id="city" onchange="fun2(this)">
+							<option value="">-市-</option>
+						</select>
+						<select id="area">
+							<option value="">-县/区-</option>
+						</select>
+					</td>
+				</tr>
+				<tr><td class="td1">选择口味：</td><td class="kws"><span class="click_c">酸</span><span class="click_c">辣</span><span class="click_c">甜</span></td></tr>
+				<tr><td class="td1">数量：</td><td class=""><input type="number" name="" min="1" max="1000" class="num" value="1"/>&nbsp;<span class="td1">份</span></td></tr>
+				<tr><td class="td1">收藏：</td>
+					<td>
+						<{if $have==1}>
+							<i class="icon-heart sc" c-id="<{$goods_list.id}>"></i>
+						<{else}>
+							<i class="icon-heart" c-id="<{$goods_list.id}>"></i>
+						<{/if}>
+						<span class="ysc">已有<{$goods_list.collect_num}>收藏</span>
+					</td>
+				</tr>
+				<tr><td class="td1">库存：</td><td><span class="td1"><{$goods_list.have_num}>份</span></td></tr>
+				<tr><td class="td1">评价：</td><td><a href="#" class="td1">已有<{$goods_list.ping_num}>人评价</a></td></tr>
+				<tr><td colspan="2" class="hop"><span class="gcar" car-id="<{$goods_list.id}>"><img src="img/show/gwc.png"/>加入购物车 </span></td></tr>
+				<tr><td colspan="2" class="hop"><a href="javascript:void(0)"><span class="go">立即购买</span></a></td></tr>
+			</table>
+		</div>
+	</div>
+</div>
+<div style="border-top: 1px solid #CCCBD9;border-bottom: 5px solid #f5f5f5;margin-top: 20px;"></div>
+<div class="text_center">
+	<div class="show_fl">
+	<ul class="sel">
+		<li><a href="javascript:void(0)">本单详情</a></li>
+		<li><a href="javascript:void(0)">消费提示</a></li>
+		<li><a href="javascript:void(0)">商家介绍</a></li>
+		<li><a href="javascript:void(0)">会员评价<span>(421)</span></a></li>
+	</ul>
+	<div>
+	<div class="sel_down">
+		<p class="sel_title">分店信息</p>
+		<div class="set1">			
+			<div class="set1_fl" id="bdMap">				
+			</div>			
+			<div class="set1_fr">
+				<div class="spp">
+					<span class="fo_cc">筛选：</span>
+					<input id="txtCity" type="text" value="" />
+					<input id="txtSearch" type="text" value="贵阳学院" />
+					<input type="button" value="搜索" onclick="search()" /><br />
+					<textarea id="txtResult" rows="5" cols="50" value="" style="margin-top: 20px;" /></textarea>
+				</div>	
+				<div class="sfr">
+					<strong><a href="#">汉釜宫韩式自助烧烤</a></strong>
+					<p><a href="#">贵阳市乌当区新添大道北段新天卫城卫央街区1-2-1,2号(建材城旁)<br>08516303800</a></p>
+				</div>
+			</div>
+		</div>
+		
+		<div ><{$goods_list.content}></div>
+		
+		<!--<p class="sel_title">套餐内容</p>
+		<table border="0" cellspacing="0" cellpadding="0" width="700" class="tab2">
+			<tr><td>团单内容</td><td>数量/规格</td><td>小计</td></tr>
+			<tr class="title"><td>自助烧烤</td><td>1份</td><td>49元</td></tr>
+		</table>
+		
+		<p class="sel_title">团单详情</p>
+		<div class="img_m"><span>江团:</span><br />
+			<img src="img/show/m1.jpg" width="700px" height="460px"/>
+		</div>
+		<div class="img_m"><span>青椒皮蛋:</span><br />
+			<img src="img/show/m2.jpg" width="700px" height="460px"/>
+		</div>
+		<div class="img_m"><span>凉拌折耳根:</span><br />
+			<img src="img/show/m3.jpg" width="700px" height="460px"/>
+		</div>
+		<div class="img_m"><span>凉拌黄瓜:</span><br />
+			<img src="img/show/m4.jpg" width="700px" height="460px"/>
+		</div>
+		<p class="jia">『图片仅供参考，具体以实物为准』</p>
+		-->
+	</div>
+
+	<div class="sel_down noshow">
+		<p class="sel_title">消费提示</p>
+		<table border="0" cellspacing="0" cellpadding="0" width="700" class="tab3">
+			<tr><td>有效期</td><td>2016年03月02日至2017年03月05日</td></tr>
+			<tr><td>可用时间</td><td>周末法定节假日通用<br />17:00 - 21:30</td></tr>
+			<tr><td>预约提示</td><td>无需预约，直接消费（高峰期间消费需排号等位）</td></tr>
+			<tr><td>使用规则</td>
+				<td>
+					<ul>
+						<li>团购用户暂不享受店内其他优惠</li>
+						<li>每张糯米券限1人使用</li>
+						<li>每次消费不限使用糯米券张数，可叠加使用</li>
+						<li>1米(不含)以下的儿童免费， 1米(含)-1.2米(含)的儿童25元/位， 1.2米(不含)以上的等同成人，需使用1张糯米券或原价支付；65周岁(不含)以上的老人凭有效证件可享受25元/位；当天过生日的顾客凭有效证件可享受免费用餐</li>
+						<li>自助餐仅限堂食，不提供打包服务部分菜品因时令原因有所不同，请以店内当日实际供应为准</li>
+						<li>老人与生日的优惠请以身份证为准（仅限会员使用）</li>						
+					</ul>
+				</td>
+			</tr>
+			<tr><td>温馨提示</td>
+				<td>
+					<ul>
+						<li>提供收费停车位，提供50个停车位，需付停车位4元/小时</li>
+						<li>提供免费WiFi</li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="sel_down noshow">
+		<p class="sel_title">商家介绍</p>
+		<div class="img_m">
+			<img src="img/show/m5.jpg" width="700px" height="460px"/>
+		</div>		
+		<div class="img_m">
+			<img src="img/show/m6.jpg" width="700px" height="460px"/>
+		</div>
+		<div class="img_m">
+			<img src="img/show/m7.jpg" width="700px" height="460px"/>
+		</div>
+	</div>
+	<div class="sel_down noshow">
+		<p class="sel_title">会员评价</p>
+		<table border="0" cellspacing="0" cellpadding="0" width="700" class="tab4">
+			<tr><td rowspan="2" class="max_f">4.7</td><td>好评：&nbsp;<progress min="0" max="100" value="80" class="prog one"></progress>&nbsp;<span class="num1"></span></td><td class="title" id="bno">我在百度糯米买过此单</td></tr>
+			<tr><td>中评：&nbsp;<progress min="0" max="100" value="15" class="prog two"></progress>&nbsp;<span class="num2"></span></td><td rowspan="2" id="bno" ><a href="shop_evaluation.php"><span class="bgpink">我要评价</span></a></td></tr>
+			<tr><td class="title">此团单共324人评论</td><td>差评：&nbsp;<progress min="0" max="100" value="5" class="prog three"></progress>&nbsp;<span class="num3"></span></td></tr>
+		</table>
+		<ul class="sel2">
+			<li><a href="javascript:void(0)">全部<span>(421)</span></a></li>
+			<li><a href="javascript:void(0)">好评<span>(421)</span></a></li>
+			<li><a href="javascript:void(0)">中评<span>(421)</span></a></li>
+			<li><a href="javascript:void(0)">差评<span>(421)</span></a></li>
+		</ul>
+		<div style="width: 700px;">
+		<div class="sel2_down">
+			<{foreach from=$com_list item=i}>
+			<div class="ping">
+				<div class="ping_fl">
+					<img src="img/show/yh.jpg" width="60px" height="60px"/><br /><span class="user"><{$vip_name[$i.user_id]}></span>
+				</div>
+				<div class="ping_fr">
+					<p><time class="timer"><{date('Y-m-d H:s',$i.send_time)}> 说：</time></p>
+					<p><{$i.content}><br><img src="/upload/goods/201609/20160928095520615.jpg" class="com_img"/></p>
+				</div>
+			</div>
+			<{/foreach}>
+		</div>
+		<div class="sel2_down noshow">
+			<div class="ping">
+				<div class="ping_fl">
+					<img src="img/show/yh.jpg" width="60px" height="60px"/><br /><span class="user">某某某</span>
+				</div>
+				<div class="ping_fr">
+					<p><time class="timer">2016-09-01 16:30 说：</time></p>
+					<p>22222今天情人节，简直爆满，还好我们去得及时，刚坐下，后面的来就开始排队了，味道一般吧，没有我想象中的丰富，态度很好，都是笑脸相迎，即使客人很多，也还是服务挺周到的，环境也挺好的，吃得还是很开心，吃了很多水果！再接再厉！</p>
+				</div>
+			</div>
+			<div class="ping">
+				<div class="ping_fl">
+					<img src="img/show/yh.jpg" width="60px" height="60px"/><br /><span class="user">某某某</span>
+				</div>
+				<div class="ping_fr">
+					<p><time class="timer">2016-09-01 16:30 说：</time></p>
+					<p>今天情人节，简直爆满，还好我们去得及时，刚坐下，后面的来就开始排队了，味道一般吧，没有我想象中的丰富，态度很好，都是笑脸相迎，即使客人很多，也还是服务挺周到的，环境也挺好的，吃得还是很开心，吃了很多水果！再接再厉！</p>
+				</div>
+			</div>
+		</div>
+		<div class="sel2_down noshow">
+			<div class="ping">
+				<div class="ping_fl">
+					<img src="img/show/yh.jpg" width="60px" height="60px"/><br /><span class="user">某某某</span>
+				</div>
+				<div class="ping_fr">
+					<p><time class="timer">2016-09-01 16:30 说：</time></p>
+					<p>333333今天情人节，简直爆满，还好我们去得及时，刚坐下，后面的来就开始排队了，味道一般吧，没有我想象中的丰富，态度很好，都是笑脸相迎，即使客人很多，也还是服务挺周到的，环境也挺好的，吃得还是很开心，吃了很多水果！再接再厉！</p>
+				</div>
+			</div>
+			<div class="ping">
+				<div class="ping_fl">
+					<img src="img/show/yh.jpg" width="60px" height="60px"/><br /><span class="user">某某某</span>
+				</div>
+				<div class="ping_fr">
+					<p><time class="timer">2016-09-01 16:30 说：</time></p>
+					<p>今天情人节，简直爆满，还好我们去得及时，刚坐下，后面的来就开始排队了，味道一般吧，没有我想象中的丰富，态度很好，都是笑脸相迎，即使客人很多，也还是服务挺周到的，环境也挺好的，吃得还是很开心，吃了很多水果！再接再厉！</p>
+				</div>
+			</div>
+		</div>
+		<div class="sel2_down noshow">
+			<div class="ping">
+				<div class="ping_fl">
+					<img src="img/show/yh.jpg" width="60px" height="60px"/><br /><span class="user">某某某</span>
+				</div>
+				<div class="ping_fr">
+					<p><time class="timer">2016-09-01 16:30 说：</time></p>
+					<p>444444今天情人节，简直爆满，还好我们去得及时，刚坐下，后面的来就开始排队了，味道一般吧，没有我想象中的丰富，态度很好，都是笑脸相迎，即使客人很多，也还是服务挺周到的，环境也挺好的，吃得还是很开心，吃了很多水果！再接再厉！</p>
+				</div>
+			</div>
+			<div class="ping">
+				<div class="ping_fl">
+					<img src="img/show/yh.jpg" width="60px" height="60px"/><br /><span class="user">某某某</span>
+				</div>
+				<div class="ping_fr">
+					<p><time class="timer">2016-09-01 16:30 说：</time></p>
+					<p>今天情人节，简直爆满，还好我们去得及时，刚坐下，后面的来就开始排队了，味道一般吧，没有我想象中的丰富，态度很好，都是笑脸相迎，即使客人很多，也还是服务挺周到的，环境也挺好的，吃得还是很开心，吃了很多水果！再接再厉！</p>
+				</div>
+			</div>
+		</div>	
+		</div>
+	</div>
+	</div>
+	</div>
+<div class="show_fr">
+	<p class="shf">看了又看<span class="hyh"><a href="#">换一换<img src="img/show/jz.png" height="15px" width="15px" /></a></span> </p>
+	<{foreach from=$ad_list $i}>
+	<div class="s_box">
+		<div class="s_box_fl">
+			<img src="/upload/ad_list/<{$i.photo}>?<{rand(0,999)}>" height="80px" width="100px" />
+		</div>
+		<div class="s_box_fr">
+			<p class="sbt"><{$i.about}></p>
+			<p class="sbp"><{$i.price}></p>
+		</div>
+	</div>
+	<{/foreach}>
+</div>
+</div>
+
+<div style="clear: both; margin-top: 200px;"></div>
+<script type="text/javascript" src="js/all/baidu_map.js"></script>
+<{include file='footer.html'}>
+<script type="text/javascript" src="js/all/sanji_select.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,179 @@
+.h_m,.nav_box{
+	display: none;
+}
+.text_center{
+	width: 980px;
+}
+.co_auto{
+	width: 980px;
+	margin: auto;
+	overflow: hidden;
+}
+.co_top{
+	margin-top: 30px;
+}
+.ct_fl{
+	float: left;
+}
+.ct_fr{
+	float: right;
+	padding: 10px 5px;
+}
+.ct_fr li{
+	float: left;
+	margin-left: 10px;
+}
+.round{
+	height:20px;
+	width:20px;
+	border-radius:50%;
+	text-align:center;
+	background: #CFCFCF;
+	color: #fff;
+	font-style: italic;
+}
+.line{
+	width:60px;
+	border: 1px solid #ccc;
+	margin-top:8px;
+}
+.co_size{
+	color: #ccc;
+	font-size: 14px;
+}
+.bgp{
+	background:#FF4883;
+}
+.sred{
+	color:#FF4883 ;
+}
+input{
+	outline: none;
+}
+.ads{
+	padding:5px;
+	background: #F3F3F3;
+	color: #000;
+}
+.ads_tab tr td{
+	padding:5px;
+}
+.ads_tab tr td:first-child{
+	color: #666;
+	font-size: 13px;
+}
+.ads_tab tr td:nth-child(2){
+	width: 450px;
+	text-align: left;
+}
+.ads_tab tr td input,select,textarea{
+	border:1px solid #ddd;
+	padding: 5px;
+}
+.ads_tab tr td input{
+	width:227px;
+}
+.ads_tab tr td input[type=submit]{
+	width: 100px;
+	background: #F5F5F5;
+	font-size: 13px;
+	border: none;
+	border-radius:3px;
+	color: #000033;
+}
+
+
+
+.sc_tab{
+	margin-top:5px;
+	width: 970px;
+}
+.sc_tab tr td{
+	padding: 10px;
+	text-align: center;
+	border-bottom:1px solid #e9e9e9;
+}
+.sc_tab tr:first-child td{
+	background:#F3F3F3 ;
+	border-top:1px solid #e9e9e9;
+	color: #666;
+	font-size: 14px;
+}
+.sc_td{
+	display: flex;
+}
+.td_fl{
+	height:80px;
+	width: 120px;
+}
+.sc_td_fl img{
+	height:80px;
+	width: 120px;
+}
+.td_fr{
+	flex: 1;
+}
+.num{
+	width: 110px;
+}
+.num .val{
+	border:none;
+	padding: 5px;
+	text-align: center;
+	width:35px;
+}
+.tx_left{
+	text-align: left;
+}
+#price,#res{
+	width:40px;
+	border: none;
+	font-size:14px;
+}
+#res{
+	width: 60px;
+	font-size:16px;
+	font-weight:600;
+	color: #F0325A;
+}
+.sc_title{
+	font-size:16px;
+	color:#000;
+}
+.sc_pro{
+	display:inline-block;
+	font-size: 13px;
+	color: #666;
+	margin-top: 15px;
+}
+.error{
+	color: red;
+	font-size: 12px;
+	margin-left: 10px;
+}
+.fr_box{
+	
+	float: right;
+}
+.fr_box li{
+	font-size: 13px;
+	color:#666;
+	margin-left: 10px;
+	padding: 10px 5px;
+}
+.zong{
+	color: #F0325A;
+	font-size:18px;
+	font-weight:600;
+	border:none ;
+	width:60px;
+	height: 30px;
+}
+#go{
+	background:#FE8A4B;
+	padding:13px 30px;
+	text-align: center;
+	color: #fff;
+	font-size: 19px;
+	cursor: pointer;
+}

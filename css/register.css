@@ -1,0 +1,136 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+body{
+	font-family: "微软雅黑";
+}
+a{
+	text-decoration: none;
+}
+header{
+	padding:20px 0px 10px;
+	overflow: hidden;
+}
+.text_auto{
+	width: 980px;
+	margin: auto;
+}
+.head_fl{
+	overflow: hidden;
+	float: left;
+}
+.logo{
+	display: inline-block;
+	height:39px;
+	width: 100px;
+	background:url(../img/vip_login/icon.png) no-repeat;
+	background-position: -285px -22px;
+	
+}
+.login{
+	color: #666;
+	border-left:1px solid #C9C9C9;
+	padding: 0px 15px;
+	margin-left:20px;
+	position: relative;
+	bottom: 5px;
+}
+.head_fr{
+	float: right;
+	padding: 10px;
+}
+.head_fr span{
+	color: #666;
+	font-size: 12px;
+}
+.head_fr a{
+	color: #666;
+	font-weight: bold;
+	border:1px solid #DDD;
+	padding:3px 15px;
+	border-radius: 3px;
+	margin-left: 5px;
+	font-size: 12px;
+}
+.hr{
+	height: 20px;
+	width: 1180px;
+	margin: auto;
+	border: none;
+	background-image: url(../img/register/reg_hr.png);
+}
+.content_fl{
+	float: left;
+	overflow: hidden;
+	margin-top:30px;
+}
+.tab1 tr td{
+	padding:0px 5px;
+	height:70px;
+}
+.tab1 tr td input{
+	padding:10px;
+	width: 326px;
+	outline: none;
+	font-size: 14px;
+	border: 1px solid #ddd;
+}
+.tab1 tr td input:focus{
+	border: 1px solid #FA6790;
+}
+.td1{
+	font-weight:700;
+	color: #666;
+	font-size: 14px;
+	text-align: right;
+}
+.lab{
+	color:#666;
+	font-size: 12px;
+}
+.lab a{
+	color:#1b66c7;
+	font-size: 12px;
+	text-decoration: none;
+}
+.lab a:hover{
+	text-decoration: underline;
+}
+#ck1{
+	width:20px;
+	vertical-align: middle;
+}
+#rgt{
+	width: 348px;
+	border: 1px solid #FA6790;
+	background: #FA6790;
+	color: #fff;
+	padding:10px;
+	font-size:14px;
+	font-weight: 700;
+}
+.content_fr{
+	float: right;
+	margin-top: 30px;
+}
+#name_error{
+	
+	
+}	
+.tis{
+	color: #666;
+	font-size: 12px;	
+	display: none;
+	
+}
+.name:focus:before{
+	color: red;
+	content: 'qefasd';
+}
+.foot{
+	text-align: center;
+    color: #7a77c8;
+    font-size: 12px;
+    margin-top: 120px;
+}

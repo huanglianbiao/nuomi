@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>shop_success</title>
+<link rel="stylesheet" type="text/css" href="css/main.css"/>
+<link rel="stylesheet" type="text/css" href="css/shop_success.css"/>
+<link rel="stylesheet" type="text/css" href="css/mfglabs_iconset.css"/>
+</head>
+<body>
+<{include file='header.html'}>
+<div class="ss_auto">
+	<div class="co_top">
+		<div class="ct_fl">
+			<a href="index.php"><img src="img/index/logo.png"/></a>
+		</div>
+		<ul class="ct_fr">
+			<li class="round">1</li>
+			<li class="co_size">确认订单</li>
+			<li class="line"></li>
+			<li class="round">2</li>
+			<li class="co_size">选择支付方式</li>
+			<li class="line"></li>
+			<li class="round bgp">3</li>
+			<li class="co_size sred">购买成功</li>
+		</ul>
+	</div>
+	<div class="ss_mid">
+	<p class="go_suc"><i class="icon-check_circle"></i><span>恭喜您,购买成功~</span></p>
+	<ul class="end">
+		<li><i class="icon-node"></i>交易时间:&nbsp;<span><{date('Y年m月d日  H:i',$order_list.send_time	)}></span></li>		
+		<li><i class="icon-node"></i>物流:&nbsp;<span>申通快递</span></li>
+		<li><i class="icon-node"></i>付款金额:&nbsp;<span><{$order_list.all_money}></span></li>
+		<li><i class="icon-node"></i>订单号:&nbsp;<span><{$order_list.order_num}></span></li>				
+		<li><i class="icon-node"></i>温馨提示:&nbsp;<span>请妥善保管该号，方便之后查询物流信息，我们会尽快和你联系并发货，感谢你对百度糯米的支持与合作，欢迎下次你光顾！</span></li>
+		<li><i class="icon-node"></i><a href="order_list.php">返回订单列表</a></li>
+	</ul>
+	</div>
+	
+		<p class="ss_title">猜你喜欢</p>	
+		<div class="like_box">
+			<div class="like">
+				<a href="#"><img src="img/index/a1.jpg"/>
+				<span>￥123.00</span></a>
+			</div>
+			<div class="like">
+				<a href="#"><img src="img/index/a5.jpg"/>
+				<span>￥123.00</span></a>
+			</div>
+			<div class="like">
+				<a href="#"><img src="img/index/a3.jpg"/>
+				<span>￥123.00</span></a>
+			</div>
+			<div class="like">
+				<a href="#"><img src="img/index/a4.jpg"/>
+				<span>￥123.00</span></a>
+			</div>
+		</div>
+</div>
+<{include file='footer.html'}>
+</body>
+</html>

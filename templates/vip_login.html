@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>vip_login</title>
+<link rel="stylesheet" type="text/css" href="css/vip_login.css"/>
+<script type="text/javascript" src="js/vip_login/vip_login.js"></script>
+</head>
+<body>
+<header>
+	<div class="head">
+		<div class="head_fl">		
+			<a href="index.php"><span class="logo"></span></a>
+			<a href="vip_login.html" class="login">登录</a>
+		</div>
+		<div class="head_fr">
+		<span>还没有百度糯米帐号</span><a href="vip_reg.php">注册</a>
+		</div>	
+	</div>
+</header>
+<div class="body">
+	<div class="head">
+		<div class="bd_fl">			
+		</div>
+		<div class="bd_fr">
+			<div class="form_box">
+			<form id="myform" method="post" action="vip_login_post.php">
+				<p class="p1"><strong>登录百度糯米</strong></p>
+				<p class="p2"><span class="error"></span><a href="#" class="msg_login"><span></span>短信快捷登录</a></p>
+				<p class="p3"><em class="ico1"></em><input type="text" id="tel" name="user"  placeholder="手机/用户名/糯米账号"  /></p>
+				<p class="p4"><em class="ico2"></em><input type="password" name="pwd" id="pwd" value="" placeholder="密码" /></p>
+				<p class="p5"><input type="checkbox" id="ck1"/><label for="ck1">下次自动登录</label><span><a href="#">登录遇到问题</a></span></p>
+				<p class="p6"><input type="submit" value="登录"/></p>
+			</form>
+			<ul class="logs">
+				<li><a href="#" rel="aa"><span class="qq"></span></a></li>
+				<li><a href="#"><span class="sina"></span></a></li>
+				<li><a href="#"><span class="weibo"></span></a></li><br />
+			</ul>
+			</div>	
+		</div>
+	</div>	
+</div>
+<footer>
+	<ul class="foot">
+		<li><a href="#">关于百度糯米</a></li>
+		<li><a href="#">常见问题</a></li>
+		<li><a href="#">违规投诉&廉政举报</a></li>
+		<li><a href="#">开放平台</a></li>
+		<li><a href="#">用户协议</a></li>
+		<li>客服电话：4006-888-887（每天9:00 - 22:00）</li><br />
+	</ul>
+	<p class="footer">©2015 nuomi.com &nbsp;<a href="#">京ICP证030173号</a>&nbsp; 京公网安备11010802014106号</p>
+</footer>
+</body>
+</html>
+

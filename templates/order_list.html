@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>order_list</title>
+<link rel="stylesheet" type="text/css" href="css/main.css"/>
+<link rel="stylesheet" type="text/css" href="css/order_list.css"/>
+<link rel="stylesheet" type="text/css" href="css/mfglabs_iconset.css"/>
+<script type="text/javascript" src="js/all/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/order_list/order_list.js"></script>
+</head>
+<body>
+	
+<{include file='header.html'}>
+<div class="main_auto">	
+	<div class="order_fl">
+		<dl>
+			<dd class="dd"><span>我的订单</span>
+				<ul class="down" id="down">
+					<li class="myli1"><a href="javascript:void(0)"><i class="icon-node"></i>团购订单</a></li>
+					<li class="myli1"><a href="javascript:void(0)"><i class="icon-node"></i>储值卡</a></li>
+					<li class="myli1"><a href="javascript:void(0)"><i class="icon-node"></i>物流单</a></li>
+					<li class="myli1"><a href="javascript:void(0)"><i class="icon-node"></i>电影选座</a></li>
+				</ul>
+			</dd>
+			<dd class="dd"><span>我的评价</span>
+				<ul class="down" id="down">
+					<li class="myli2"><a href="javascript:void(0)"><i class="icon-node"></i>待评价</a></li>
+					<li class="myli2"><a href="javascript:void(0)"><i class="icon-node"></i>已评价</a></li>
+				</ul>
+			</dd>
+			<dd class="dd"><span>我的收藏</span>
+				<ul class="down" id="down">
+					<li class="myli3"><a href="javascript:void(0)"><i class="icon-node"></i>收藏 </a></li>
+				</ul>
+			</dd>
+			<dd class="dd"><span>我的账户</span>
+				<ul class="down" id="down">
+					<li class="myli4"><a href="javascript:void(0)"><i class="icon-node"></i>账户设置</a></li>
+					<li class="myli4"><a href="javascript:void(0)"><i class="icon-node"></i>余额(充值卡兑换)</a></li>
+					<li class="myli4"><a href="javascript:void(0)"><i class="icon-node"></i>优惠券</a></li>
+					<li class="myli4"><a href="https://www.baifubao.com/user/0/my_bfb/0"><i class="icon-node"></i>百度钱包余额</a></li>
+				</ul>
+			</dd>
+		</dl>
+		<div class="fl_bot">
+			<strong>4006-888-887</strong>
+			<p>客服电话 免长途费</p>
+			<p>周一至周日 9:00-22:00</p>			
+		</div>
+		<span class="icon01"></span>
+	</div>
+	<div class="order_fr">
+		<!--我的订单1-->
+		<div class="li_down_box">	
+
+		<!--团购订单-->
+		<div class="li_down1">
+			<ul class="ld_menu"> 
+				<li><a href="javascript:void(0)">全部</a></li>
+				<li><a href="javascript:void(0)">未使用</a></li>
+				<li><a href="javascript:void(0)">即将到期</a></li>
+				<li><a href="javascript:void(0)">待付款</a></li>
+				<li><a href="javascript:void(0)">已使用</a></li>
+				<li><a href="javascript:void(0)">已过期 </a></li>
+				<li><a href="javascript:void(0)">退款</a></li>
+			</ul>
+			<table border="0" cellspacing="0" cellpadding="0" class="tab1" width="900">
+				<tr><td>团购信息</td><td>单价</td><td>数量</td><td>实付金额</td><td colspan="2">状态</td></tr>
+			<{foreach from=$order_list item=i}>
+				<tr class="tr1">
+					<td class="ltd1" id="dtd">订单号：<{$i.order_num}></td>
+					<td class="ltd2" colspan="2">下单时间：<{date('Y年m月d日 H:i',$i.send_time)}></td>
+					<td class="ltd2" colspan="2">总额：<{$i.all_money}></td>
+					<td>
+						<{if $i.state==0}>
+							<a href="javascript:void(0)" class="bgog">未发货</a>
+						<{else if $i.state==1}>
+							<a href="javascript:void(0)" class="bgog">已发货</a>
+						<{else if $i.state==2}>
+							<a href="javascript:void(0)" class="bgog">已签收</a>
+						<{else if $i.state==3}>
+							<a href="javascript:void(0)" class="bgog">已完成</a>
+						<{else if $i.state==-1}>
+							<a href="javascript:void(0)" class="bgog">已取消</a>
+						<{/if}>
+						<a href="javascript:void(0)" del_ord="<{$i.id}>"  class="a_ch del_ord">删除订单</a>
+					</td>
+				</tr>
+				<{foreach from=$i.order_list item=j}>
+				<tr>
+					<td class="ltd1" id="td_wid">
+						<div class="td_l"><a href="javascript:void(0)"><img src="/upload/goods/<{$j.id.photos.0}>"/></a></div>
+						<div class="td_r">
+							<p class="sp1 aa"><a href="javascript:void(0)"><{$j.id.title}></a></p><br />
+							<span class="sp2"><{$j.op}></span>
+						</div>
+					</td>
+					<td class="sprice ltd2"><{$j.id.price}></td>
+					<td class="num ltd2"><{$j.num}></td>
+					<td class="sall ltd2"></td>
+					<td></td>
+					<td>
+						<{if $i.state==3 && $j.s==0}>
+							<a href="shop_comment.php?ord_id=<{$i.id}>&goods_id=<{$j.id.id}>" class="gcomm">评价</a>	
+						<{else if $j.s==1}>
+							<span>已评价</span>	
+						<{/if}>
+					</td>
+				</tr>
+				<{/foreach}>
+			<{/foreach}>
+			</table>
+		</div>
+		
+		<!--储值卡-->
+		<div class="li_down1 noshow">
+			<ul class="ld_menu"> 
+				<li><a href="javascript:void(0)">全部</a></li>
+				<li><a href="javascript:void(0)">未使用</a></li>
+				<li><a href="javascript:void(0)">即将到期</a></li>
+				<li><a href="javascript:void(0)">待付款</a></li>
+				<li><a href="javascript:void(0)">已使用</a></li>
+				<li><a href="javascript:void(0)">已过期 </a></li>
+				<li><a href="javascript:void(0)">退款</a></li>
+			</ul>
+			<table border="0" cellspacing="0" cellpadding="0" class="tab1">
+				<tr><td>团购信息</td><td>单价</td><td>数量</td><td>实付金额</td><td>状态</td><td>操作</td></tr>
+				<tr>
+					<td class="ltd1"><div class="td_l"><a href="javascript:void(0)"><img src="img/order_list/1.jpg"/></a></div><div class="td_r"><span class="sp1"><a href="javascript:void(0)">世纪金源单人自助晚餐</a></span><br /><span class="sp2">有效期至：2017-04-10</span></div></td>
+					<td class="ltd2">¥178.00</td>
+					<td class="ltd2">1</td>
+					<td class="ltd2">¥178.00</td>
+					<td><span class="ltd2">待付款</span><br /><a href="javascript:void(0)" class="a_ch">订单详情</a></td>
+					<td><a href="javascript:void(0)" class="bgog">付款</a><br /><a href="javascript:void(0)" class="del a_ch">删除订单</a></td>
+				</tr>
+				<tr>
+					<td class="ltd1"><div class="td_l"><a href="javascript:void(0)"><img src="img/order_list/1.jpg"/></a></div><div class="td_r"><span class="sp1"><a href="javascript:void(0)">世纪金源单人自助晚餐</a></span><br /><span class="sp2">有效期至：2017-04-10</span></div></td>
+					<td class="ltd2">¥178.00</td>
+					<td class="ltd2">1</td>
+					<td class="ltd2">¥178.00</td>
+					<td><span class="ltd2">待付款</span><br /><a href="javascript:void(0)" class="a_ch">订单详情</a></td>
+					<td><a href="javascript:void(0)" class="bgog">付款</a><br /><a href="javascript:void(0)" class="del a_ch">删除订单</a></td>
+				</tr>
+			</table>
+			<dl class="mydl">
+				<dt>储值卡的作用</dt>
+				<dd><i class="icon-node"></i>储值卡是糯米商户发行的单用途电子预付卡。</dd>
+				<dd><i class="icon-node"></i>到商家消费时,可使用其发行的储值卡直接付款。</dd>
+			</dl>
+			<dl class="mydl">
+				<dt>与团单代金券的区别</dt>
+				<dd><i class="icon-node"></i>代金券和储值卡都可以在指定商家抵扣现金。</dd>
+				<dd><i class="icon-node"></i>代金券不可拆分使用，储值卡可以拆分多次付款。</dd>
+				<dd><i class="icon-node"></i>储值卡可自助付款抵扣现金。</dd>
+			</dl>
+			<dl class="mydl">
+				<dt>使用说明</dt>
+				<dd><i class="icon-node"></i>在我的储值卡页中选择储值卡，输入消费金额告知收银员确认即可。</dd>
+				<dd><i class="icon-node"></i>不同的储值卡的面值、有效期和使用限制不同，使用前请认真阅读。</dd>
+				<dd><i class="icon-node"></i>储值卡不记名、不挂失、不兑现、不计息。</dd>
+				<dd><i class="icon-node"></i>储值卡只能单独下单购买（即不能与其他商品同时下单购买），且不能使用代金券、红包进行购买。</dd>
+				<dd><i class="icon-node"></i>储值卡仅能在指定商家所属门店消费，不同糯米商家不可通用。</dd>
+				<dd><i class="icon-node"></i>储值卡只限于普通消费者使用，如发现有经销商或其他非普通消费者使用，百度糯米有权立即取消订单并做相关处理。</dd>
+				<dd><i class="icon-node"></i>所有储值卡严禁出售或转让，如经发现并证实的，将予以作废处理。</dd>
+				<dd><i class="icon-node"></i>储值卡订单，退款结算按照实际支付金额退款；部分退货的订单，将取消该笔订单的促销优惠。</dd>
+			</dl>
+		</div>		
+		
+		<!--物流单-->	
+		<div class="li_down1 noshow">
+			<ul class="ld_menu"> 
+				<li><a href="javascript:void(0)">全部</a></li>
+				<li><a href="javascript:void(0)">待付款</a></li>
+				<li><a href="javascript:void(0)">待发货</a></li>
+				<li><a href="javascript:void(0)">已发货</a></li>				
+				<li><a href="javascript:void(0)">退款</a></li>
+			</ul>
+			<!--<table border="0" cellspacing="0" cellpadding="0" class="tab1">
+				<tr><td>团购信息</td><td>单价</td><td>数量</td><td>实付金额</td><td>状态</td><td>操作</td></tr>
+				<tr>
+					<td class="ltd1"><div class="td_l"><a href="javascript:void(0)"><img src="img/order_list/1.jpg"/></a></div><div class="td_r"><span class="sp1"><a href="javascript:void(0)">世纪金源单人自助晚餐</a></span><br /><span class="sp2">有效期至：2017-04-10</span></div></td>
+					<td class="ltd2">¥178.00</td>
+					<td class="ltd2">1</td>
+					<td class="ltd2">¥178.00</td>
+					<td><span class="ltd2">待付款</span><br /><a href="javascript:void(0)" class="a_ch">订单详情</a></td>
+					<td><a href="javascript:void(0)" class="bgog">付款</a><br /><a href="javascript:void(0)" class="del a_ch">删除订单</a></td>
+				</tr>
+				<tr>
+					<td class="ltd1"><div class="td_l"><a href="javascript:void(0)"><img src="img/order_list/1.jpg"/></a></div><div class="td_r"><span class="sp1"><a href="javascript:void(0)">世纪金源单人自助晚餐</a></span><br /><span class="sp2">有效期至：2017-04-10</span></div></td>
+					<td class="ltd2">¥178.00</td>
+					<td class="ltd2">1</td>
+					<td class="ltd2">¥178.00</td>
+					<td><span class="ltd2">待付款</span><br /><a href="javascript:void(0)" class="a_ch">订单详情</a></td>
+					<td><a href="javascript:void(0)" class="bgog">付款</a><br /><a href="javascript:void(0)" class="del a_ch">删除订单</a></td>
+				</tr>
+			</table>-->
+			<div class="no_order">暂无全部订单</div>
+		</div>
+	
+		<!--电影选座-->
+		<div class="li_down1 noshow">
+			<ul class="ld_menu"> 
+				<li><a href="javascript:void(0)">全部</a></li>
+				<li><a href="javascript:void(0)">待付款</a></li>
+				<li><a href="javascript:void(0)">已付款</a></li>				
+			</ul>
+			<!--<table border="0" cellspacing="0" cellpadding="0" class="tab1">
+				<tr><td>团购信息</td><td>单价</td><td>数量</td><td>实付金额</td><td>状态</td><td>操作</td></tr>
+				<tr>
+					<td class="ltd1"><div class="td_l"><a href="javascript:void(0)"><img src="img/order_list/1.jpg"/></a></div><div class="td_r"><span class="sp1"><a href="javascript:void(0)">世纪金源单人自助晚餐</a></span><br /><span class="sp2">有效期至：2017-04-10</span></div></td>
+					<td class="ltd2">¥178.00</td>
+					<td class="ltd2">1</td>
+					<td class="ltd2">¥178.00</td>
+					<td><span class="ltd2">待付款</span><br /><a href="javascript:void(0)" class="a_ch">订单详情</a></td>
+					<td><a href="javascript:void(0)" class="bgog">付款</a><br /><a href="javascript:void(0)" class="del a_ch">删除订单</a></td>
+				</tr>
+				<tr>
+					<td class="ltd1"><div class="td_l"><a href="javascript:void(0)"><img src="img/order_list/1.jpg"/></a></div><div class="td_r"><span class="sp1"><a href="javascript:void(0)">世纪金源单人自助晚餐</a></span><br /><span class="sp2">有效期至：2017-04-10</span></div></td>
+					<td class="ltd2">¥178.00</td>
+					<td class="ltd2">1</td>
+					<td class="ltd2">¥178.00</td>
+					<td><span class="ltd2">待付款</span><br /><a href="javascript:void(0)" class="a_ch">订单详情</a></td>
+					<td><a href="javascript:void(0)" class="bgog">付款</a><br /><a href="javascript:void(0)" class="del a_ch">删除订单</a></td>
+				</tr>
+			</table>-->
+			<div class="no_order">暂无全部订单</div>
+		</div>
+		</div>
+		
+		
+		<!--我的评价2-->			
+		<div class="li_down_box">
+		<!--待评价-->	
+		<div class="li_down2 noshow">
+			<ul class="ld_menu"> 
+				<li><a href="javascript:void(0)">待评价&nbsp;></a></li>				
+			</ul>
+			<table border="0" cellspacing="0" cellpadding="0" class="tab1">
+				<tr><td>团购信息</td><td>单价</td><td>数量</td><td>实付金额</td><td>状态</td><td>操作</td></tr>
+				<tr>
+					<td class="ltd1"><div class="td_l"><a href="javascript:void(0)"><img src="img/order_list/1.jpg"/></a></div><div class="td_r"><span class="sp1"><a href="javascript:void(0)">世纪金源单人自助晚餐</a></span><br /><span class="sp2">有效期至：2017-04-10</span></div></td>
+					<td class="ltd2">¥178.00</td>
+					<td class="ltd2">1</td>
+					<td class="ltd2">¥178.00</td>
+					<td><span class="ltd2">交易成功</span><br /><a href="javascript:void(0)" class="a_ch">订单详情</a></td>
+					<td><a href="shop_comment.php" class="bgog">评价</a><br /><a href="javascript:void(0)" class="del a_ch">删除</a></td>
+				</tr>
+			</table>
+			<div class="no_order noshow	">暂无评价订单</div>
+		</div>
+	
+		<!--已评价-->
+		<div class="li_down2 noshow">
+			<ul class="ld_menu"> 
+				<li><a href="javascript:void(0)">已评价&nbsp;></a></li>		
+			</ul>
+			<ul class="sel2">
+				<li><a href="javascript:void(0)">全部<span>(421)</span></a></li>
+				<li><a href="javascript:void(0)">好评<span>(42)</span></a></li>
+				<li><a href="javascript:void(0)">中评<span>(21)</span></a></li>
+				<li><a href="javascript:void(0)">差评<span>(41)</span></a></li>
+			</ul>
+			<div style="width: 700px;">
+				
+		<div class="sel2_down">
+			
+			<{foreach from=$comm_list item=i}>
+			<div class="ping">
+				<div class="ping_fl">
+					<img src="/upload/goods/<{$i.goods_id.photos.0}>" width="120px" height="70px"/>
+				</div>
+				<div class="ping_fr">
+					<p><time class="timer"><span class="user"><{$user}></span><{date('Y-m-d H:i:s',$i.send_time)}> 说：</time></p>
+					<p><{$i.content}></p>
+				</div>
+			</div>
+			<{/foreach}>
+				
+		</div>				
+			</div>	
+			<div class="no_order noshow">暂无评价订单</div>
+		</div>
+	</div>
+	
+	<!--我的收藏3-->
+	<div class="li_down_box">
+		<!--收藏-->
+		<div class="li_down3 noshow">
+			<ul class="ld_menu"> 
+				<li><a href="javascript:void(0)">进行中</a></li>
+				<li><a href="javascript:void(0)">已结束</a></li>
+			</ul>
+			<table border="0" cellspacing="0" cellpadding="0" class="tab1" width="900">
+				<tr><td>团购信息</td><td>单价</td><td>操作</td></tr>
+				<{foreach from=$collect_list item=i}>
+				<tr>
+					<td class="ltd1">
+						<div class="td_l"><a href="javascript:void(0)"><img src="/upload/goods/<{$i.goods_id.photos.0}>"/></a></div>
+						<div class="td_r">
+							<p class="sp1"><a href="javascript:void(0)"><{$i.goods_id.title}></a></p><br />
+							<span class="sp2">收藏时间：<{date('Y-m-d',$i.send_time)}></span>
+						</div>
+					</td>
+					<td class="ltd2">¥<{$i.goods_id.price}></td>
+					<td><a href="javascript:void(0)" cancel-id="<{$i.id}>" class="bgog collect">取消收藏</a></td>
+				</tr>
+				<{/foreach}>
+			</table>
+			<div class="no_order noshow">暂无收藏</div>
+		</div>
+		</div>
+
+	<!--我的账户4-->
+	<div class="li_down_box">
+		<!--账户设置-->
+		<div class="li_down4 noshow">
+			<ul class="ld_menu"> 
+				<li><a href="javascript:void(0)">基本资料</a></li>
+			</ul>
+			<form name="reg_testdate" method="post" action="order_list_post.php" enctype="multipart/form-data" >
+			<table border="0" cellspacing="0" cellpadding="0" class="tab2">
+				<tr><td>头像：</td>
+					<td>
+						<div class="">
+							<img src="/upload/vip/<{$vip_list.photo}>?<{rand(0,999)}>" class="photo"/><br />
+							<input type="hidden" name="old_photo" value="<{$vip_list.photo}>" />
+							<input type="file" name="photo" id="vip_head"/>
+						</div>
+					</td>
+				</tr>
+				<tr><td>昵称：</td><td><input type="text" name="ni_name" value="<{$vip_list.ni_name}>" /></td></tr>
+				<tr><td>生日：</td>
+					<td>
+						<select name="YYYY" onchange="YYYYDD(this.value)">
+							<option value="2011">请选择 年</option>
+						</select>
+						<select name="MM" onchange="MMDD(this.value)">
+							<option value="5">选择 月</option>
+						</select>
+						<select name="DD">
+							<option value="6">选择 日</option>
+						</select>
+					</td>
+				</tr>
+				<tr><td>性别:</td>
+					<td>
+						<{if $vip_list.sex==1}>
+							<input type="radio" name="sex" id="man" checked value="1" />&nbsp;<label for="man">男</label>&nbsp;&nbsp;&nbsp;
+							<input type="radio" name="sex" id="woman" value="0" />&nbsp;<label for="woman">女</label>
+						<{else}>
+							<input type="radio" name="sex" id="man" value="1"/>&nbsp;<label for="man">男</label>&nbsp;&nbsp;&nbsp;
+							<input type="radio" name="sex" id="woman" value="0" checked  />&nbsp;<label for="woman">女</label>
+						<{/if}>
+					</td>
+				</tr>
+				<tr><td>密码:</td>
+					<td>
+						<input type="text" name="pwd"  value="" />
+						<input type="hidden" name="old_pwd" value="<{$vip_list.pwd}>" />
+					</td>
+				</tr>
+				<tr><td>手机号:</td><td><input type="text" name="tel" value="<{$vip_list.tel}>" /></td></tr>
+				<tr><td>地址：</td>
+					<td>
+						<select id="s_province" name="pp"></select>
+						<select id="s_city" name="cc"></select>
+						<select id="s_county" name="aa"></select>
+					</td>
+				</tr>
+				<tr><td>邮箱:</td><td><input type="text" name="email" value="<{$vip_list.email}>" /></td></tr>
+				<tr><td>详细地址:</td><td><textarea name="address" rows="5" cols="30"><{$vip_list.address}></textarea></td></tr>
+				<tr><td></td><td><input type="submit" value="保存" /></td></tr>
+			</table>
+			</form>
+		</div>
+		<!--余额(充值与兑换)-->
+		<div class="li_down4 noshow">
+			<ul class="ld_menu">  
+				<li><a href="javascript:void(0)">全部</a></li>
+				<li><a href="javascript:void(0)">可使用</a></li>
+				<li><a href="javascript:void(0)">已用完</a></li>
+			</ul>
+			<div class="no_order">暂无可使用余额</div>
+			<dl class="mydl">
+				<dt>余额的作用？</dt>
+				<dd><i class="icon-node">您支付订单的时候，可用余额抵付现金。</i></dd>						
+			</dl>
+			<dl class="mydl">
+				<dt>余额如何获得？</dt>
+				<dd><i class="icon-node">在线充值余额，在“我的余额”中给自己的账号充值，或在线购买充值卡，充值卡卡号密码可在“我的余额”中兑换绑定到任何账号。充值金额等于余额增加的金额，暂时不可以退款不可提现。</i></dd>						
+			</dl>
+			<dl class="mydl">
+				<dt>余额如何使用？</dt>
+				<dd><i class="icon-node"></i>在订单支付页中，如果您的订单允许使用余额，百度糯米会根据您的可用余额自动帮您计算出该订单最大的余额抵用金额，支付时所需现金相应扣减。暂不支持手动修改余额支付金额。</dd>
+				<dd><i class="icon-node"></i>若您的余额不足以支付订单金额，则不足部分仍需您继续使用其他方式予以支付；若您的余额金额较多，支付订单后仍有剩余，则剩余部分您再次购买时可继续使用。</dd>						
+			</dl>
+			<dl class="mydl">
+				<dt>余额发放、使用的限制说明？</dt>				
+				<dd><i class="icon-node"></i>购物类的团单、运营活动中部分特殊优惠的团单（如秒杀活动团单）及部分其他类型的团单（如销售型优惠券）不支持使用余额支付。</dd>
+				<dd><i class="icon-node"></i>在线电影选座订单、精选品牌及储值卡团单，仅支持在手机客户端使用余额。</dd>				
+			</dl>
+			<dl class="mydl">
+				<dt>使用余额的订单退款</dt>
+				<dd><i class="icon-node"></i>如果订单申请退款成功，订单中余额支付的金额可以返还到您的余额中；如果订单同时使用红包及余额支付，部分退款时优先退余额，超出余额的部分优先退有效期较长的红包。</dd>					
+			</dl>			
+		</div>
+		<!--优惠券-->
+		<div class="li_down4 noshow">
+			<ul class="ld_menu">  
+				<li><a href="javascript:void(0)">全部</a></li>
+				<li><a href="javascript:void(0)">未使用</a></li>
+				<li><a href="javascript:void(0)">已使用</a></li>
+				<li><a href="javascript:void(0)">已过期</a></li>
+			</ul>
+			<div class="no_order">您目前没有未使用的优惠券</div>
+			<dl class="mydl">
+				<dt>优惠券使用规则是怎样的？</dt>				
+				<dd><i class="icon-node"></i>优惠券不退款、不找零；不同的优惠券面值、有效期和使用限制不同，使用前请认真阅读；</dd>
+				<dd><i class="icon-node"></i>一个订单只能使用一张优惠券；</dd>	
+				<dd><i class="icon-node"></i>优惠券金额大于订单金额，则差额不予退回；如优惠券金额小于订单金额，则需由客户支付差额；优惠券不可兑现，且不开发票；</dd>
+				<dd><i class="icon-node"></i>使用优惠券支付的订单，退款结算按照实际支付金额退款；部分退货的订单，按照退货部分所占订单金额的比例使用优惠券，优惠券余额不予补给；</dd>	
+				<dd><i class="icon-node"></i>优惠券只限于供普通消费者使用，如发现有经销商使用优惠券，百度糯米有权立即取消订单并做相关处理；</dd>
+				<dd><i class="icon-node"></i>所有优惠券严禁出售或转让，如经发现并证实的，将予以作废处理。</dd>	
+				<dd><i class="icon-node"></i>具体优惠券使用规则参见《百度糯米优惠券使用规则》(详见https://www.nuomi.com/about/eula)</dd>
+			</dl>
+			<dl class="mydl">
+				<dt>为什么有的优惠券不能使用？</dt>				
+				<dd><i class="icon-node"></i>一个订单使用的优惠券需满足该优惠券使用范围等规则。优惠券适用的范围（品类、团单等），百度糯米有权根据不同时段进行调整和优化，请用户关注团单页面详细信息（如该团单显示优惠券可用用户即可使用，如该团单显示或提示优惠券不可用用户则不可使用）。相关疑问请致电糯米客服电话：4006-888-887。</dd>
+				<dd><i class="icon-node"></i>优惠券应当在有效期内使用，过期则无法使用；</dd>	
+				<dd><i class="icon-node"></i>优惠券一旦使用，在订单生成后，将无法退回。如取消订单，订单中所使用的优惠券将无法再次使用。</dd>
+			</dl>			
+		</div>
+		</div>
+	</div>	
+</div>
+<div style="clear: both;"></div>
+<{include file='footer.html'}>
+<script type="text/javascript" src="js/all/area.js"></script>
+
+<script type="text/javascript">
+
+//年月日三级联动
+function YYYYMMDDstart(){   
+	MonHead = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];   
+	
+	//先给年下拉框赋内容   
+	var y  = new Date().getFullYear();  
+	for (var i = (y-30); i < (y+30); i++) //以今年为准，前30年，后30年   
+		   document.reg_testdate.YYYY.options.add(new Option(" "+ i +" 年", i));   
+	
+	//赋月份的下拉框   
+	for (var i = 1; i < 13; i++)   
+		   document.reg_testdate.MM.options.add(new Option(" " + i + " 月", i));   
+	
+	document.reg_testdate.YYYY.value = y;   
+	document.reg_testdate.MM.value = new Date().getMonth() + 1;   
+	var n = MonHead[new Date().getMonth()];   
+	if (new Date().getMonth() ==1 && IsPinYear(YYYYvalue)) n++;   
+		writeDay(n); //赋日期下拉框Author:meizz   
+	document.reg_testdate.DD.value = new Date().getDate();   
+}   
+if(document.attachEvent)   
+	window.attachEvent("onload", YYYYMMDDstart);   
+else   
+window.addEventListener('load', YYYYMMDDstart, false);   
+function YYYYDD(str) //年发生变化时日期发生变化(主要是判断闰平年)   
+{   
+	var MMvalue = document.reg_testdate.MM.options[document.reg_testdate.MM.selectedIndex].value;   
+	if (MMvalue == ""){ var e = document.reg_testdate.DD; optionsClear(e); return;}   
+	var n = MonHead[MMvalue - 1];   
+	if (MMvalue ==2 && IsPinYear(str)) n++;   
+	writeDay(n)   
+}   
+function MMDD(str)   //月发生变化时日期联动   
+{   
+	var YYYYvalue = document.reg_testdate.YYYY.options[document.reg_testdate.YYYY.selectedIndex].value;   
+	if (YYYYvalue == ""){ var e = document.reg_testdate.DD; optionsClear(e); return;}   
+	var n = MonHead[str - 1];   
+	if (str ==2 && IsPinYear(YYYYvalue)) n++;   
+	writeDay(n)   
+}   
+function writeDay(n)   //据条件写日期的下拉框   
+{   
+	var e = document.reg_testdate.DD; optionsClear(e);   
+	for (var i=1; i<(n+1); i++)   
+	e.options.add(new Option(" "+ i + " 日", i));   
+}   
+function IsPinYear(year)//判断是否闰平年   
+{
+	return(0 == year%4 && (year%100 !=0 || year%400 == 0));
+}   
+function optionsClear(e)   
+{   
+	e.options.length = 1;   
+}   
+	
+	
+</script>
+</body>
+</html>
+     			
+
+
+
+

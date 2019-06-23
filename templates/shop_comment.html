@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>shop_comment</title>
+<link rel="stylesheet" type="text/css" href="css/main.css"/>
+<link rel="stylesheet" type="text/css" href="css/shop_evaluation.css"/>
+<link rel="stylesheet" type="text/css" href="css/mfglabs_iconset.css"/>
+<script type="text/javascript" src="js/all/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/shop_evaluation/shop_evaluation.js"></script>
+</head>
+<body>
+<{include file='header.html'}>
+<div class="ss_auto">
+	<div class="co_top">
+		<div class="ct_fl">
+			<a href="index.php"><img src="img/index/logo.png"/></a>
+		</div>
+		<ul class="ct_fr">
+			<li class="round">1</li>
+			<li class="co_size">确认订单</li>
+			<li class="line"></li>
+			<li class="round">2</li>
+			<li class="co_size">选择支付方式</li>
+			<li class="line"></li>
+			<li class="round">3</li>
+			<li class="co_size">购买成功</li>
+			<li class="line"></li>
+			<li class="round bgp">4</li>
+			<li class="co_size sred">评价</li>
+		</ul>
+	</div>
+</div>
+<div class="ss_auto main">	
+	<form action="shop_comment_post.php" method="post" id="myform">
+		<input type="hidden" name="ord_id"  value="<{$ord_id}>" />
+		<input type="hidden" name="goods_id" value="<{$goods_id}>" />
+	<table border="0" cellspacing="0" cellpadding="0" class="tab">
+		<tr><td>评价:</td><td><textarea cols="55" rows="15" name="content"></textarea></td></tr>		
+	</table>
+
+	<div class="star_box">
+		<div class="sb">
+			<div class="des">描述相符:</div>
+			<ul class="star">			
+				<li><i class="icon-star"></i></li>
+				<li><i class="icon-star"></i></li>
+				<li><i class="icon-star"></i></li>
+				<li><i class="icon-star"></i></li>
+				<li><i class="icon-star"></i></li>			
+			</ul>
+			<div class="minute"></div>
+		</div>
+		<div class="sb">
+			<div class="des">卖家服务:</div>
+			<ul class="star">			
+				<li><i class="icon-star"></i></li>
+				<li><i class="icon-star"></i></li>
+				<li><i class="icon-star"></i></li>
+				<li><i class="icon-star"></i></li>
+				<li><i class="icon-star"></i></li>			
+			</ul>
+			<div class="minute"></div>
+		</div>
+		<div class="sb">
+			<div class="des">物流服务:</div>
+			<ul class="star">			
+				<li><i class="icon-star"></i></li>
+				<li><i class="icon-star"></i></li>
+				<li><i class="icon-star"></i></li>
+				<li><i class="icon-star"></i></li>
+				<li><i class="icon-star"></i></li>			
+			</ul>
+			<div class="minute"></div>
+		</div>		
+	</div>
+	<p class="ping"><input type="submit" id="sub" value="提交评价" /></p>
+</form>
+</div>
+<{include file='footer.html'}>
+	
+	
+<script type="text/javascript">
+//编辑器
+/*$(document).ready(function(){  
+    CKEDITOR.replace('editor_content');//括号里面必须是多文本框的id名 
+ 
+});
+
+
+$('#sub').click(function(){
+	$("#editor_content").val(CKEDITOR.instances.editor_content.getData());
+
+})*/
+	
+</script>
+</body>
+</html>

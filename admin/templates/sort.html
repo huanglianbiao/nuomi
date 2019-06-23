@@ -1,0 +1,106 @@
+<div class="list animated fadeIn" id="list">
+  	<h3>分类管理列表</h3>	
+  	<div class="ed_sort">
+  		顶级分类：<select name="" id="sel" >
+  			<option value="0">顶级分类</option>
+  			<{foreach from = $tsl item=v}>
+  				<option value="<{$v.id}>"><{$v.name}></option>
+  			<{/foreach}>
+  		</select>
+  		&nbsp;&nbsp;分类名称：<input type="text" id="sname" /><input type="hidden" name="hid" id="hid" value="0"/>
+  		&nbsp;&nbsp;排序：<input type="number" id="order" />&nbsp;&nbsp;<input type="button" id="btn" value="保存" />
+  	</div>
+    <table class="table table-hover">    	
+    <thead>
+	  <tr><th>ID</th><th>分类名称</th><th>排序</th><th>操作</th></tr>
+	  </thead>
+	  <tbody>
+	  <{foreach from =$sort_list item=i}>
+	  	<{if $i.pid==0}>
+		  <tr <{if $i.ord<0}>  class="sdel" <{/if}>>
+		  	<td><{$i.id}></td>
+		  	<td class="sort1"><{$i.name}></td>	
+		  	<td><{$i.ord}></td>
+		  	<td>
+		  		<a href="javascript:void(0)" edit-id="<{$i.id}>" class="btn btn-info btn-xs edit">编辑</a>&nbsp;
+		  		<a href="javascript:void(0)" del-id="<{$i.id}>" class="btn btn-danger btn-xs del btn btn-primary" >删除</a>
+		  	</td>
+		  </tr>
+		  		<{if $i.ord<0}>
+			  		<{continue}>	
+			  	<{/if}>
+			  		
+			  	<{foreach from =$sort_list item=j}>			  		
+				  	<{if $j.pid==$i.id}>
+					 	<tr <{if $j.ord<0}>  class="sdel" <{/if}>>
+						  	<td><{$j.id}></td>
+						  	<td class="sort2"><{$j.name}></td>	
+						  	<td><{$j.ord}></td>
+						  	<td>
+						  		<a href="javascript:void(0)" edit-id="<{$j.id}>" class="btn btn-info btn-xs edit">编辑</a>&nbsp;
+						  		<a href="javascript:void(0)" del-id="<{$j.id}>" class="btn btn-danger btn-xs del btn btn-primary" >删除</a>
+						  	</td>
+					  </tr>				  	
+				  	<{/if}>
+			  <{/foreach}>
+		<{/if}>
+	  	
+	  <{/foreach}>
+	  
+	  </tbody>
+</table>
+</div>
+<script type="text/javascript">
+
+//保存
+$('#btn').click(function(){
+	var s_id=$('#sel option:checked').val();
+	var sname=$('#sname').val();
+	var ord=$('#order').val();
+	var hid=$('#hid').val();
+	if(sname==''){
+		alert('请输入分类名称！');
+		return false;
+	}
+	$.post('sort_post.php',{id:s_id,hid:hid,name:sname,ord:ord},function(data){
+		if(data==1){
+			$.get('sort.php',function(data){
+				$('#admin_show').html(data);
+			});
+		}
+	});
+})
+
+	
+//编辑
+$('.edit').click(function(){
+	var ed_id=$(this).attr('edit-id');
+	$.get('sort_post.php',{ed_id:ed_id},function(data){	
+		var data=eval('('+data+')');
+		$('#sname').val(data.name);
+		$('#order').val(data.ord);
+		$('#hid').val(data.id);
+		$('#sel option').attr('selected',false);
+		$('#sel option').each(function(){
+			if($(this).val()==data.pid){
+				$(this).attr('selected',true);
+				
+			}
+		})
+	})
+});
+
+//删除
+
+$('.del').click(function () {	 
+	var del_id=$(this).attr('del-id');
+	$.get('sort_post.php',{del_id:del_id},function(data){	
+		if(data==1){
+			$.get('sort.php',function(data){
+				$('#admin_show').html(data);
+			});
+		}
+	});  
+});
+
+</script>

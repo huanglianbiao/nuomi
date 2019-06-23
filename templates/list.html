@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>list</title>
+<link rel="stylesheet" type="text/css" href="css/main.css"/>
+<link rel="stylesheet" type="text/css" href="css/list.css"/>
+<script type="text/javascript" src="js/all/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/index/jquery.lazyload.js"></script>
+<script type="text/javascript" src="js/index/tz_fly.js"></script>
+</head>
+<body>
+<{include file='header.html'}>
+<p class="text_center ltop"><span class="cb">全部结果&nbsp;>&nbsp;<{$sort1_name}></span></p>
+<div class="text_center sort">
+	<table border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td class="cb">分类:</td>
+			<td><a href="list.php?id=<{$sort_id}>&price=<{$price}>&ord=<{$ord}>" class="bgp">全部</a></td>
+			<{foreach from=$sort2 item=i}>
+				<{if $i.id==$sort_id2}>
+					<td><a href="list.php?sort_id2=<{$i.id}>&id=<{$sort_id}>&price=<{$price}>&ord=<{$ord}>" class="color-c c_red"><{$i.name}></a></td>
+				<{else}>
+					<td><a href="list.php?sort_id2=<{$i.id}>&id=<{$sort_id}>&price=<{$price}>&ord=<{$ord}>" class="color-c"><{$i.name}></a></td>
+				<{/if}>
+			<{/foreach}>
+		</tr>
+		<tr><td class="cb">价格:</td><td><a href="list.php?id=<{$sort_id}>&sort_id2=<{$sort_id2}>&ord=<{$ord}>" class="bgp">全部</a></td>
+			<{if $price==1}>
+				<td><a href="list.php?price=1&id=<{$sort_id}>&sort_id2=<{$sort_id2}>&ord=<{$ord}>"  class="color-c c_red">100元以内</a></td>
+				<td><a href="list.php?price=2&id=<{$sort_id}>&sort_id2=<{$sort_id2}>&ord=<{$ord}>" class="color-c">100-200元</a></td>
+				<td><a href="list.php?price=3&id=<{$sort_id}>&sort_id2=<{$sort_id2}>&ord=<{$ord}>" class="color-c">300-500元</a></td>
+			<{else if $price==2}>
+				<td><a href="list.php?price=1&id=<{$sort_id}>&sort_id2=<{$sort_id2}>&ord=<{$ord}>"  class="color-c">100元以内</a></td>
+				<td><a href="list.php?price=2&id=<{$sort_id}>&sort_id2=<{$sort_id2}>&ord=<{$ord}>" class="color-c c_red">100-200元</a></td>
+				<td><a href="list.php?price=3&id=<{$sort_id}>&sort_id2=<{$sort_id2}>&ord=<{$ord}>" class="color-c">300-500元</a></td>
+			<{else if $price==3}>
+				<td><a href="list.php?price=1&id=<{$sort_id}>&sort_id2=<{$sort_id2}>&ord=<{$ord}>"  class="color-c">100元以内</a></td>
+				<td><a href="list.php?price=2&id=<{$sort_id}>&sort_id2=<{$sort_id2}>&ord=<{$ord}>" class="color-c">100-200元</a></td>
+				<td><a href="list.php?price=3&id=<{$sort_id}>&sort_id2=<{$sort_id2}>&ord=<{$ord}>" class="color-c c_red">300-500元</a></td>
+			<{else}>
+				<td><a href="list.php?price=1&id=<{$sort_id}>&sort_id2=<{$sort_id2}>&ord=<{$ord}>"  class="color-c">100元以内</a></td>
+				<td><a href="list.php?price=2&id=<{$sort_id}>&sort_id2=<{$sort_id2}>&ord=<{$ord}>" class="color-c">100-200元</a></td>
+				<td><a href="list.php?price=3&id=<{$sort_id}>&sort_id2=<{$sort_id2}>&ord=<{$ord}>" class="color-c">300-500元</a></td>
+			<{/if}>
+		</tr>
+	</table>
+</div>	
+<div class="text_center list">
+	<ul class="choice">
+		<{if $ord==1}>
+			<li><a href="list.php?ord=2&id=<{$sort_id}>&price=<{$price}>&sort_id2=<{$sort_id2}>" class="hbgp">价格从高到低</a></li>
+		<{else}>
+			<li><a href="list.php?ord=1&id=<{$sort_id}>&price=<{$price}>&sort_id2=<{$sort_id2}>" class="hbgp">价格从低到高</a></li>		
+		<{/if}>
+		<li><a href="list.php?ord=3&id=<{$sort_id}>&price=<{$price}>&sort_id2=<{$sort_id2}>" class="hbgp">销量</a></li>
+	</ul>
+</div>
+<div class="text_center imgs_pro">
+	<{foreach from=$goods_list item=i}>
+	<div class="img_pro">				
+		<a href="show.php?id=<{$i.id}>"><img src="img/ICBCLoading.gif" data-original="/upload/goods/<{$i.photos.0}>" width="223px" height="135px" class="custom"/></a>
+		<div class="img_pro_bot">
+			<a href="show.php?id=<{$i.id}>"><h4><{$i.title}></h4></a>
+			<p class="over_hid"><a href="#" class="color-c"><{$i.about}></a></p>
+			<p><span class="price"><{$i.price}></span><span class="shopping" car-id="<{$i.id}>"><img src="img/index/g.png"/>加入购物车</span></p>
+		</div>		
+	</div>
+	<{/foreach}>
+	
+</div>
+
+
+<div class="text_center pages">
+	<ul class="page">
+		<li><a href="list.php?page=1&<{$url}>" class="page" page-data="1">首页</a></li>
+		<{if $prev_page<1}>
+	   		<li><a href="javascript:void(0)">上一页</a></li>
+	    <{else}>
+	    	<li><a href="list.php?page=<{$prev_page}>&<{$url}>">上一页</a></li>
+	    <{/if}>
+	    <{section name=sn loop=$all_page}>
+	    	<{if $page==$smarty.section.sn.index+1}>
+	    		<li class="bg_color"><a href="list.php?page=<{$smarty.section.sn.index+1}>&<{$url}>"><{$smarty.section.sn.index+1}></a></li>
+	    		<{else}>
+	    		<li><a href="list.php?page=<{$smarty.section.sn.index+1}>&<{$url}>"><{$smarty.section.sn.index+1}></a></li>
+	   		<{/if}>	    
+	    <{/section}>
+	    	<{if $next_page > $all_page}>
+	   		<li><a href="javascript:void(0)">下一页</a></li>
+	    <{else}>
+	    	<li><a href="list.php?page=<{$next_page}>&<{$url}>">下一页</a></li>
+	    <{/if}>
+	    <li><a href="list.php?page=<{$all_page}>&<{$url}>">末页</a></li>
+	</ul>
+</div>
+
+
+<div style="clear: both;margin-top: 150px;"></div>
+<{include file='footer.html'}>	
+
+<script type="text/javascript">
+//加入购物车
+$('.shopping').click(function(){
+	var id=$(this).attr('car-id');
+	var n=1;
+	
+	$.get('add_car.php',{id:id,n:n},function(data){
+		//alert(data)
+		if(data==0){
+		alert('请先登录！！');location.replace("vip_login.php");
+		}
+	})
+})
+</script>
+
+</body>
+</html>

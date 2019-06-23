@@ -1,0 +1,191 @@
+<div class="list_box">
+<div class="list">
+  	<h3>订单列表</h3>	 	
+    <table class="table table-hover">    	
+    <thead>
+	  <tr><th>ID</th><th>用户名</th><th>订单号</th><th>下单时间</th><th>总金额</th><th>状态</th><th>是否支付</th><th>操作</th></tr>
+	  </thead>
+	  <tbody>
+	  <{foreach from =$vip_order item=i}>	  
+	  <tr>
+	  	<td><{$i.id}></td>
+	  	<td><{$i.vip_id}></td>
+	  	<td><{$i.order_num}></td>
+	  	<td><{date('Y-m-d H:s',$i.send_time)}></td>
+	  	<td><{$i.all_money}></td>
+	  	<{if $i.state==0 }>
+	  		<td>未发货</td>
+	  		<{else if $i.state==-1}>
+	  			<td>已取消</td>
+	  		<{else if $i.state==1}>
+	  		<td>已发货</td>		
+	  		<{else if $i.state==2}>
+	  		<td>已签收</td>
+	  		<{else}>
+	  		<td class="gg">完成</td>
+	  		
+	  	<{/if}>
+	  	<td><{$i.is_pay}></td>
+	  	<{if $i.state==0 }>
+	  		<td>
+	  			<a href="javascript:void(0)" data-id="<{$i.id}>" class="btn btn-info btn-xs send">发货</a>&nbsp;
+	  			<a href="javascript:void(0)" data-id="<{$i.id}>" class="btn btn-danger btn-xs ord_cancel">取消</a>&nbsp;
+	  		</td>
+	  		<{else if $i.state==-1}>
+	  		<td>
+	  			<span class="btn btn-xs">已取消</span>&nbsp;
+	  		</td>
+	  		<{else if $i.state==1}>
+	  		<td>
+	  			<a href="javascript:void(0)" data-id="<{$i.id}>" class="btn btn-info btn-xs suc_send">已发货</a>&nbsp;
+	  			<a href="javascript:void(0)" data-id="<{$i.id}>" class="btn btn-danger btn-xs ord_cancel">取消</a>&nbsp;
+	  		</td>
+	  		<{else if $i.state==2}>
+	  		<td>
+	  			<a href="javascript:void(0)" data-id="<{$i.id}>" class="btn btn-info btn-xs succ">已签收</a>&nbsp;
+	  			<a href="javascript:void(0)" data-id="<{$i.id}>" class="btn btn-danger btn-xs ord_cancel">取消</a>&nbsp;
+	  		</td>
+	  		<{else}>
+	  		<td>
+	  			<span class="btn-xs gg">完成</span>&nbsp;
+	  		</td>
+	  	<{/if}>
+	  	</tr>
+	  <{/foreach}>
+	  	
+	  <tr id="bb">
+	   	   <td colspan="12">
+	  		<ul class="pagination pagination-sm">
+	  			<li><a href="javascript:void(0)" class="page" page-data="1">首页</a></li>
+	  			<{if $prev_page<1}>
+			   		<li><a href="javascript:void(0)">&laquo;</a></li>
+			    <{else}>
+			    	<li><a href="javascript:void(0)" class="page" page-data="<{$prev_page}>">&laquo;</a></li>
+			    <{/if}>
+			    <{section name=sn loop=$all_page}>
+			    	<{if $page==$smarty.section.sn.index+1}>
+			    		<li><a href="javascript:void(0)" class="page" id="bg_color" page-data="<{$smarty.section.sn.index+1}>"><{$smarty.section.sn.index+1}></a></li>
+			    		<{else}>
+			    		<li><a href="javascript:void(0)" class="page" page-data="<{$smarty.section.sn.index+1}>"><{$smarty.section.sn.index+1}></a></li>
+			   		<{/if}>
+			    
+			    <{/section}>
+			    	<{if $next_page > $all_page}>
+			   		<li><a href="javascript:void(0)">&raquo;</a></li>
+			    <{else}>
+			    	<li><a href="javascript:void(0)" class="page" page-data="<{$next_page}>">&raquo;</a></li>
+			    <{/if}>
+			    <li><a href="javascript:void(0)" class="page" page-data="<{$all_page}>">末页</a></li>
+			</ul>
+	  	  </td>
+	   </tr>
+	  </tbody>
+	  <input type="hidden" id="back_page"/>
+</table>
+</div>
+</div>
+<script type="text/javascript">
+//分页
+$('.page').click(function(){
+	var page=$(this).attr('page-data');
+	//alert(page);
+	$.get('vip_order.php',{page:page},function(data){		
+		$('#admin_show').html(data);
+		$('#back_page').val('vip_order.php?page='+page);
+		
+	})
+})
+
+var back_page=$('#back_page').val();
+console.log(back_page);
+//发货
+$('.send').click(function(){	
+	var sid=$(this).attr('data-id');
+	$.confirm({
+    title:'提示',
+    content:'确定发货了吗？',
+    animation: 'rotateXR',
+    closeAnimation: 'rotateX',
+    confirm: function(){          
+		$.get('vip_order.php',{sid:sid},function(data){
+		if(data==1){
+			
+			$.get(back_page,function(data){
+				$('#admin_show').html(data);
+			})
+		}else{
+			alert('失败！');
+		};
+	})
+    }
+});	
+});
+//已发货
+$('.suc_send').click(function(){	
+	var id=$(this).attr('data-id');	
+	$.confirm({
+    title:'提示',
+    content:'确定已发货了吗？',
+    animation: 'rotateXR',
+    closeAnimation: 'rotateX',
+    confirm: function(){          
+		$.get('vip_order.php',{suid:id},function(data){
+		if(data==1){
+			$.get(back_page,function(data){
+				$('#admin_show').html(data);
+			})
+		}else{
+			alert('失败！');
+		};
+	})	
+    }
+});
+});
+
+//已签收
+$('.succ').click(function(){	
+	var id=$(this).attr('data-id');	
+	$.confirm({
+    title:'提示',
+    content:'确定已签收了吗？',
+    animation: 'rotateXR',
+    closeAnimation: 'rotateX',
+    confirm: function(){          
+		$.get('vip_order.php',{succ:id},function(data){
+		if(data==1){
+			$.get(back_page,function(data){
+				$('#admin_show').html(data);
+			})
+		}else{
+			alert('失败！');
+		};
+	})	
+    }
+});	
+});
+
+//取消
+$('.ord_cancel').on('click', function () {	
+var id=$(this).attr('data-id');	
+$.confirm({
+    title:'提示',
+    content:'确定删除吗？',
+    animation: 'rotateXR',
+    closeAnimation: 'rotateX',
+    confirm: function(){          
+		$.get('vip_order.php',{cid:id},function(data){
+		if(data==1){
+			$.get(back_page,function(data){
+				$('#admin_show').html(data);
+			})
+		}else{
+			alert('失败！');
+		};
+})
+    }
+});
+});
+
+
+
+</script>

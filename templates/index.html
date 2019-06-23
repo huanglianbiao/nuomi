@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>index</title>
+<link rel="stylesheet" type="text/css" href="css/main.css"/>
+<link rel="stylesheet" type="text/css" href="css/index.css"/>
+<script type="text/javascript" src="js/all/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/index/tz_fly.js"></script>
+<script type="text/javascript" src="js/index/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript" src="js/index/index.js"></script>
+<script type="text/javascript" src="js/all/phonegap100.js"></script>
+<script type="text/javascript" src="js/index/jquery.lazyload.js"></script>
+	<script src="../js/index/index.js"></script>
+
+</head>
+<body>
+<{include file='header.html'}>
+<div class="text_center menu">
+	
+<!--	轮播图-->
+<div class="menu_mid">
+	<div class="img_box">
+		<ul class="imgs">
+			<{foreach from=$ad_list1 item=i}>
+			<li><a href="#"><img src="upload/ad_list/<{$i.photo}>?<{rand(0,999)}>" height="260px" width="735px" /></a></li>
+			<{/foreach}>
+		</ul>
+		<div class="img_but">
+			<a href="javascript:void(0)" class="prev"></a>
+			<a href="javascript:void(0)" class="next"></a>
+		</div>
+	</div>	
+	<div class="img_mid_bot">
+		<div class="imb">
+			<h4>热门团购</h4>
+			<a href="#" class="color-c">电影</a>
+			<a href="#" class="color-c">自助餐</a>
+			<a href="#" class="color-c">KTV</a>
+			<a href="#" class="color-c">火锅</a>
+			<a href="#" class="color-c">蛋糕</a>
+			<a href="#" class="color-c">酒店</a>
+			<a href="#" class="color-c">小吃</a>
+			<a href="#" class="color-c">快餐</a>
+			<a href="#" class="color-c">西餐</a>
+		</div>
+		<div class="imb">
+			<h4>热门团购</h4>
+			<a href="#" class="color-c">电影</a>
+			<a href="#" class="color-c">自助餐</a>
+			<a href="#" class="color-c">KTV</a>
+			<a href="#" class="color-c">火锅</a>
+			<a href="#" class="color-c">蛋糕</a>
+			<a href="#" class="color-c">酒店</a>
+			<a href="#" class="color-c">小吃</a>
+			<a href="#" class="color-c">快餐</a>
+			<a href="#" class="color-c">西餐</a>
+		</div> 
+		<div class="imb">
+			<h4>热门团购</h4>
+			<a href="#" class="color-c">电影</a>
+			<a href="#" class="color-c">自助餐</a>
+			<a href="#" class="color-c">KTV</a>
+			<a href="#" class="color-c">火锅</a>
+			<a href="#" class="color-c">蛋糕</a>
+			<a href="#" class="color-c">酒店</a>
+			<a href="#" class="color-c">小吃</a>
+			<a href="#" class="color-c">快餐</a>
+			<a href="#" class="color-c">西餐</a>
+		</div>		
+	</div>
+</div>
+<div class="menu_fr">
+	<a href="#"><img src="/upload/ad_list/<{$ad2.photo}>?<{rand(0,999)}>" width="233px" height="411px"/></a>
+</div>
+</div>
+
+<!--介绍-->
+<div class="main text_center">
+	<{foreach from=$sort1 key=k item=i}>
+		<div class="main_pro">		
+			
+			<div class="title" id="f<{$k+1}>"><img src="img/index/m<{$k+1}>.png" class="icon_a"/><{$i.name}>
+				<ul>
+					<{foreach from=$sort2 item=n}>
+						<{if $n.pid==$i.id}>
+							<li><a href="list.php?id=<{$i.id}>$sort_id2=<{$n.id}>" class="color-c"><{$n.name}></a></li>
+							<li>|</li>
+						<{/if}>
+					<{/foreach}>
+					<li><a href="#" class="color-c">其他</a></li>
+				</ul>
+			</div>
+			<div class="imgs_pro">
+				<{foreach from=$goods_list key=k item=j}>
+					<{if $j.sort_id==$i.id}>
+					<div class="img_pro">	
+						<a href="show.php?id=<{$j.id}>"><img src="img/ICBCLoading.gif" data-original="/upload/goods/<{$j.photos.0}>" width="223px" height="135px" class="custom"/></a>
+						<div class="img_pro_bot">
+							<a href="show.php?id=<{$j.id}>" id="aa"><h4><{$j.title}></h4></a>
+							<p class="over_hid"><a href="#" class="color-c"><{$j.about}></a></p>
+							<p><span class="price"><{$j.price}></span><span class="shopping" car-id="<{$j.id}>"><img src="img/index/g.png"/>加入购物车</span></p>
+						</div>				
+					</div>	
+					<{/if}>
+				<{/foreach}>
+			</div>			
+		</div>		
+	<{/foreach}>
+</div>
+
+<!--楼层-->
+<ul class="aside_fl">
+	<{foreach from=$sort1 key=k item=i}>
+	<li><a href="javascript:bookmarkscroll.scrollTo('f<{$k+1}>')"><img src="img/index/m<{$k+1}>.png" class="icon_b icon_fl"/><span class="size_a"><{$i.name}></span></a></li>
+	
+	<{/foreach}>
+	
+</ul>
+
+<div style="clear: both;"></div>
+<{include file='footer.html'}>
+
+</body>
+</html>
+                          
